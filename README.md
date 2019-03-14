@@ -19,9 +19,9 @@
 
 **King Arthur**: Well, you have to know these things when you're king, y'know.
 
-##Tehtävät
+## Tehtävät
 
-###Viikko 1
+### Viikko 1
 
 [link to komentorivi](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/komentorivi.txt)
 
