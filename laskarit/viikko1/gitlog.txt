@@ -1,0 +1,100 @@
+commit bd6e26b5ee9e1b7375cf7d3053569f2671ef26a5 (HEAD -> master)
+Author: Timo Reijonen <timo.reijonen@helsinki.fi>
+Date:   Thu Mar 14 14:12:18 2019 +0200
+commit bd6e26b5ee9e1b7375cf7d3053569f2671ef26a5 (HEAD -> master)
+Author: Timo Reijonen <timo.reijonen@helsinki.fi>
+Date:   Thu Mar 14 14:12:18 2019 +0200
+
+    viesti
+
+ tiedostoja/file2.txt             | 0
+ tiedostoja/{file1.txt => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 08ca508ce36d218699f7c51234b7457ee3722fa5
+Author: Timo Reijonen <timo.reijonen@helsinki.fi>
+Date:   Thu Mar 14 14:09:39 2019 +0200
+
+    tiedostoja
+
+ tiedostoja/file1.txt | 0
+ tiedostoja/file2.txt | 0
+ tiedostoja/file3.txt | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 7e565bc4805ed18a7973f97a7f35316e338bb597
+Author: Timo Reijonen <timo.reijonen@helsinki.fi>
+Date:   Thu Mar 14 14:05:02 2019 +0200
+
+    jees
+
+ eka.txt    | 4 +++-
+ kolmas.txt | 3 ++-
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+commit 00bf11bcbe41fb3a250044fb23809a8c6d12886f
+Author: Timo Reijonen <timo.reijonen@helsinki.fi>
+Date:   Thu Mar 14 14:02:24 2019 +0200
+
+    tiedosto uudelleennimetty ekaksi
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit caf6d128d7c18f544ffe00f0d62993d5df390c87
+Author: Timo Reijonen <timo.reijonen@helsinki.fi>
+Date:   Thu Mar 14 14:01:31 2019 +0200
+
+    toinen poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 2e9978d4cfd96fa253582677a414be7efa568dda
+Author: Timo Reijonen <timo.reijonen@helsinki.fi>
+Date:   Thu Mar 14 13:45:40 2019 +0200
+
+    Wikipediasta tekstiä lisää
+
+ tiedosto.txt | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+commit 6df5b29264799f3d972b132ab133364fddf40e30
+Author: Timo Reijonen <timo.reijonen@helsinki.fi>
+Date:   Thu Mar 14 13:44:33 2019 +0200
+
+    Wikipediasta tekstiä
+
+ tiedosto.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit b3d65ebeb24572909449eeab342cc106af261026
+Author: Timo Reijonen <timo.reijonen@helsinki.fi>
+Date:   Thu Mar 14 13:40:04 2019 +0200
+
+    muutoksia
+    muutoksia
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit e6c24ec030e2e58f4c7a66dbd59fae6ee13516e2
+Author: Timo Reijonen <timo.reijonen@helsinki.fi>
+Date:   Thu Mar 14 13:38:07 2019 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 608a2c6260b8e1973ad577ecbf01150692902037
+Author: Timo Reijonen <timo.reijonen@helsinki.fi>
+Date:   Thu Mar 14 13:35:44 2019 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
