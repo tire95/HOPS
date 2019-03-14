@@ -26,3 +26,6 @@
 [link to komentorivi](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/komentorivi.txt)
 
 [link to gitlog](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/gitlog.txt)
+
+
+Tämä on hauskaa
