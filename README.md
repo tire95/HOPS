@@ -11,3 +11,5 @@
 **Sir Bedevere**: How do you know so much about swallows?
 **King Arthur**: Well, you have to know these things when you're king, y'know.
 
+[link to komentorivi](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/komentorivi.txt)
+[link to gitlog](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/gitlog.txt)
