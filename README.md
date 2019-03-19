@@ -23,11 +23,12 @@
 
 ### Viikko 1
 
-[link to komentorivi](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/komentorivi.txt)
+[Komentorivi](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/komentorivi.txt)
 
-[link to gitlog](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/gitlog.txt)
+[Gitlog](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/gitlog.txt)
+
+### Viikko 2
+
+[Screenshot](https://github.com/tire95/HOPS/blob/master/laskarit/viikko2/Screenshot%20from%202019-03-19%2015-11-58.png)
 
 [Vaatimusmäärittely](https://github.com/tire95/HOPS/blob/master/dokumentointi/vaatimusmaarittely.md)
-
-
-Tämä on hauskaa
