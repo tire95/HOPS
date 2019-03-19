@@ -1,14 +1,14 @@
-*Vaatimusmäärittely*
+# Vaatimusmäärittely
 
-**Sovelluksen tarkoitus**
+## Sovelluksen tarkoitus
 
 Sovelluksen avulla opiskelija pystyy seuraamaan omaa edistymistään opinnoissaan. Luodessaan käyttäjätunnuksen opiskelija voi kirjata suoritettuja kurssejaan järjestelmään, ja tätä kautta seurata omien opintojen edistymistä.
 
-**Käyttäjät**
+## Käyttäjät
 
 Sovelluksella on ainostaan yksi käyttäjärooli; opiskelija.
 
-**Suunnitellut toiminnot**
+## Suunnitellut toiminnot
 
 Ennen kirjautumista:
 
