@@ -21,6 +21,8 @@
 
 ## Tehtävät
 
+[Työaikakirjanpito](https://github.com/tire95/HOPS/blob/master/dokumentointi/tyoaikakirjanpito.md)
+
 ### Viikko 1
 
 [Komentorivi](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/komentorivi.txt)
