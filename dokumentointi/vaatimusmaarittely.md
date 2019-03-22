@@ -4,6 +4,11 @@
 
 Sovelluksen avulla opiskelija pystyy seuraamaan omaa edistymistään opinnoissaan. Luodessaan käyttäjätunnuksen opiskelija voi kirjata suoritettuja kurssejaan järjestelmään, ja tätä kautta seurata omien opintojen edistymistä.
 
+## Toimintaympäristön rajoitteet
+
+- Sovellus toimii Linux-järjestelmillä
+- Sovellus tallentaa tiedot paikallisen koneen levylle
+
 ## Käyttäjät
 
 Sovelluksella on ainostaan yksi käyttäjärooli; opiskelija.
