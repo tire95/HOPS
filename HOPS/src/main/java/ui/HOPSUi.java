@@ -17,14 +17,14 @@ public class HOPSUi {
 
     private HOPSService HOPSService;
     
-    public HOPSUi() throws ClassNotFoundException {
+    public HOPSUi() {
         Database database = new Database("jdbc:sqlite:tietokanta.db");
         SQLStudentDao sDao = new SQLStudentDao(database);
         SQLCourseDao cDao = new SQLCourseDao(database);
         this.HOPSService = new HOPSService(sDao, cDao);
     }
 
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) {
         HOPSUi ui = new HOPSUi();
         System.out.println("Keskeneräinen versio HOPS-ohjelmasta.");
         System.out.println("Ainoa tuettu ominaisuus on uuden opiskelijan luonti.");
