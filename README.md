@@ -1,42 +1,30 @@
 # Ohjelmistotekniikka, harjoitustyö - HOPS
 
+Sovelluksen avulla opiskelija pystyy seuraamaan opintojensa edistymistä.
 
-**Old Man from Scene 24**: Stop! WHAT is your name?
+Tällä hetkellä sovellus tukee vain uusien opiskelijoiden lisäämistä ja olemassa olevien opiskelijoiden listaamista.
 
-**King Arthur**: It is Arthur, King of the Britons!
-
-**Old Man from Scene 24**: WHAT is your quest?
-
-**King Arthur**: To seek the Holy Grail!
-
-**Old Man from Scene 24**: WHAT is the airspeed velocity of an unladen swallow?
-
-**King Arthur**: What do you mean? African or European swallow?
-
-**Old Man from Scene 24**: I, I don't know that! *gets pulled to the sky and thrown down the Gorge of Eternal Peril*
-
-**Sir Bedevere**: How do you know so much about swallows?
-
-**King Arthur**: Well, you have to know these things when you're king, y'know.
+## Dokumentaatio
 
 [Vaatimusmäärittely](https://github.com/tire95/HOPS/blob/master/dokumentointi/vaatimusmaarittely.md)
 
 [Työaikakirjanpito](https://github.com/tire95/HOPS/blob/master/dokumentointi/tyoaikakirjanpito.md)
 
-### Viikko 1
+## Komentorivitoiminnot
 
-[Komentorivi](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/komentorivi.txt)
+### Testaus
 
-[Gitlog](https://github.com/tire95/HOPS/blob/master/laskarit/viikko1/gitlog.txt)
+Testit suoritetaan komennolla
 
-### Viikko 2
+	mvn test
 
-[Screenshot](https://github.com/tire95/HOPS/blob/master/laskarit/viikko2/Screenshot%20from%202019-03-19%2015-11-58.png)
+Testikattavuus luodaan komennolla
 
-### Viikko 3
+	mvn jacoco:report
 
-[Monopolin luokkakaavio](https://github.com/tire95/HOPS/blob/master/laskarit/viikko3/Monopoli%20luokkakaavio.png)
+### Suoritus komentoriviltä
 
-[Kohdan 3 sekvenssikaavio](https://github.com/tire95/HOPS/blob/master/laskarit/viikko3/Kohta%203%2C%20kone%20sekvenssikaavio.png)
+Ohjelman suoritus komentoriviltä onnistuu komennolla
 
-[Kohdan 4 sekvenssikaavio](https://github.com/tire95/HOPS/blob/master/laskarit/viikko3/Kohta%204%2C%20HSL%20sekvenssikaavio.png)
+	mvn compile exec:java -Dexec.mainClass=ui.HOPSUi
+
