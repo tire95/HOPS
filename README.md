@@ -19,7 +19,7 @@
 
 **King Arthur**: Well, you have to know these things when you're king, y'know.
 
-## Tehtävät
+[Vaatimusmäärittely](https://github.com/tire95/HOPS/blob/master/dokumentointi/vaatimusmaarittely.md)
 
 [Työaikakirjanpito](https://github.com/tire95/HOPS/blob/master/dokumentointi/tyoaikakirjanpito.md)
 
@@ -33,4 +33,10 @@
 
 [Screenshot](https://github.com/tire95/HOPS/blob/master/laskarit/viikko2/Screenshot%20from%202019-03-19%2015-11-58.png)
 
-[Vaatimusmäärittely](https://github.com/tire95/HOPS/blob/master/dokumentointi/vaatimusmaarittely.md)
+### Viikko 3
+
+[Monopolin luokkakaavio](https://github.com/tire95/HOPS/blob/master/laskarit/viikko3/Monopoli%20luokkakaavio.png)
+
+[Kohdan 3 sekvenssikaavio](https://github.com/tire95/HOPS/blob/master/laskarit/viikko3/Kohta%203%2C%20kone%20sekvenssikaavio.png)
+
+[Kohdan 4 sekvenssikaavio](https://github.com/tire95/HOPS/blob/master/laskarit/viikko3/Kohta%204%2C%20HSL%20sekvenssikaavio.png)
