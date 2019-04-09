@@ -8,3 +8,6 @@ Päivä | Tunnit | Mitä tein
 29.3. | 3h | DAO:n kertaus ja työn edistys
 1.4. | 2h | koodausta
 2.4. | 3,5h | sovelluksen viimeistely viikkopalautusta varten ja muuta säätöä
+4.4. | 1,5h | SQLStudentDao:n koodin aloitus
+5.4. | 1h | StackOverflowista SQL- ja dao-asioiden opiskelua
+8.4. | 4h | SQLStudentDao:n viimeistely, JavaFX:n kertaus, checkstylen käyttöönotto, graafisen käyttöliittymän aloitus

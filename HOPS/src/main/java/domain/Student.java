@@ -5,14 +5,15 @@
  */
 package domain;
 
+
 /**
  *
  * @author timo
  */
 public class Student {
-    private int id;
-    private String name;
-    private String username;
+    private final int id;
+    private final String name;
+    private final String username;
     
     public Student(int i, String n, String u) {
         this.id = i;
@@ -21,33 +22,30 @@ public class Student {
     }
     
     public int getId() {
-        return this.id;
+        return id;
     }
     
     public String getName() {
-        return this.name;
+        return name;
     }
     
     public String getUsername() {
-        return this.username;
+        return username;
     }
         
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Student)) {
-            return false;
-        }
-        
-        Student other = (Student) obj;
-        if (this.id == other.getId()) {
-            return true;
-        }
-        return this.username.equals(other.getUsername());
-    }
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (!(obj instanceof Student)) {
+//            return false;
+//        }
+//        
+//        Student other = (Student) obj;
+//        if (this.id == other.getId()) {
+//            return true;
+//        }
+//        return this.username.equals(other.getUsername());
+//    }
+
     
-    @Override
-    public String toString() {
-        return "Student " + this.name + ", username " + this.username;
-    }
     
 }

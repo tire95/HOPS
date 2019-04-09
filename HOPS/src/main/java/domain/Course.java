@@ -5,31 +5,66 @@
  */
 package domain;
 
+
 /**
  *
  * @author timo
  */
 public class Course {
-    private String code;
-    private String name;
-    private int points;
-    
-    public Course(String c, String n, int p) {
+
+    private final int id;
+    private final int studentId;
+    private final String code;
+    private final String name;
+    private final int points;
+
+    public Course(int i, int si, String c, String n, int p) {
+        this.id = i;
+        this.studentId = si;
         this.code = c;
         this.name = n;
         this.points = p;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public int getStudentId() {
+        return studentId;
+    }
+
     public String getCode() {
-        return this.code;
+        return code;
     }
-    
+
     public String getName() {
-        return this.name;
+        return name;
     }
-    
+
     public int getPoints() {
-        return this.points;
+        return points;
     }
     
+    @Override
+    public String toString() {
+        return "Kurssikoodi: " + code + ", kurssinimi: " + name + ", opintopisteitä: " + points;
+    }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (!(obj instanceof Course)) {
+//            return false;
+//        }
+//        Course other = (Course) obj;
+//        
+//        if (this.id == other.getId()) {
+//            return true;
+//        }
+//        if (this.code.equals(other.getCode())) {
+//            return true;
+//        }
+//        return this.name.equals(other.getName());
+//    }
+
 }

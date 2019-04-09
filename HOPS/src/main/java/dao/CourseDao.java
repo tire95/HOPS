@@ -12,10 +12,18 @@ import java.util.List;
  *
  * @author timo
  */
-public interface CourseDao<T, K> {
+public interface CourseDao<T, K, S> {
+
     T findOne(K key) throws SQLException;
-    List<T> findAll() throws SQLException;
-    T saveOrUpdate(T object) throws SQLException;
+
+    List<T> findAllForStudent(K key) throws SQLException;
+
+    T save(T object) throws SQLException;
+
     void delete(K key) throws SQLException;
+
+    T findByName(K key, S string) throws SQLException;
+
+    T findByCode(K key, S string) throws SQLException;
 
 }

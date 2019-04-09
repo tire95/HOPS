@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class Database {
     
-    private String databaseAddress;
+    private final String databaseAddress;
 
     public Database(String databaseAddress) {
         this.databaseAddress = databaseAddress;
