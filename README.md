@@ -10,6 +10,8 @@ Tällä hetkellä sovellus tukee vain uusien opiskelijoiden lisäämistä ja ole
 
 [Työaikakirjanpito](https://github.com/tire95/HOPS/blob/master/dokumentointi/tyoaikakirjanpito.md)
 
+[Arkkitehtuuri](https://github.com/tire95/HOPS/blob/master/dokumentointi/arkkitehtuuri.md)
+
 ## Komentorivitoiminnot
 
 ### Testaus
