@@ -2,7 +2,7 @@
 
 Sovelluksen avulla opiskelija pystyy seuraamaan opintojensa edistymistä.
 
-Tällä hetkellä sovellus tukee vain uusien opiskelijoiden lisäämistä ja olemassa olevien opiskelijoiden listaamista.
+Tällä hetkellä sovellus tukee vain uusien opiskelijoiden lisäämistä, sisäänkirjautumista, ja opiskelijan kurssien tulostusta.
 
 ## Dokumentaatio
 
