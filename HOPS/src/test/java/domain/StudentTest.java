@@ -43,7 +43,7 @@ public class StudentTest {
     
     @Test
     public void getIdWorks() {
-        assertTrue(arto.getId() == 1);
+        assertEquals(1, arto.getId());
     }
     
 

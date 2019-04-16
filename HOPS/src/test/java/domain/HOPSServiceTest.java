@@ -28,7 +28,7 @@ public class HOPSServiceTest {
     HOPSService service;
     Database testDatabase;
 
-    public HOPSServiceTest() {
+    public HOPSServiceTest() throws SQLException {
         testDatabase = new Database("jdbc:sqlite:testDatabase.db");
         SQLStudentDao sd = new SQLStudentDao(testDatabase);
         SQLCourseDao cd = new SQLCourseDao(testDatabase);
@@ -58,47 +58,65 @@ public class HOPSServiceTest {
     @After
     public void tearDown() {
     }
-    
+
     @Test
     public void notExistingUserCannotLogIn() throws SQLException {
-        boolean loggedIn = service.logIn("non-existing");
-        assertTrue(loggedIn == false);
+        assertFalse(service.logIn("non-existing"));
     }
-    
+
     @Test
     public void existingUserCanLogIn() throws SQLException {
-        boolean loggedIn = service.logIn("testi");
-        assertTrue(loggedIn == true);
+        assertTrue(service.logIn("testi"));
     }
-    
+
     @Test
     public void creatingUserFailsIfUsernameUsed() throws SQLException {
-        boolean userCreated = service.createNewUser("testiNimi", "testi");
-        assertTrue(userCreated == false);
+        assertFalse(service.createNewUser("testiNimi", "testi"));
     }
-    
+
     @Test
     public void creatingUserSucceedsIfUsernameNotUsed() throws SQLException {
-        boolean userCreated = service.createNewUser("testiNimi", "morso");
-        assertTrue(userCreated == true);
+        assertTrue(service.createNewUser("testiNimi", "morso"));
     }
-    
+
     @Test
     public void courseListIsEmpty() throws SQLException {
         service.logIn("testi");
         List<Course> courses = service.getAllCourses();
         assertTrue(courses.isEmpty());
     }
-    
+
     @Test
     public void creatingNewCourseSucceeds() throws SQLException {
         service.logIn("testi");
-        boolean creatingCourseSucceeded = service.createNewCourse("TEST2", "Test Course", 5);
-        assertTrue(creatingCourseSucceeded == true);
+        assertTrue(service.createNewCourse("TEST2", "Test Course", 5));
+    }
+
+    @Test
+    public void courseListSizeIsCorrect() throws SQLException {
+        service.logIn("testi");
+        service.createNewCourse("TEST2", "Test Course", 5);
         List<Course> courses = service.getAllCourses();
-        assertTrue(courses.size() == 1);
+        assertEquals(1, courses.size());
+    }
+
+    @Test
+    public void creatingExistingCourseFails() throws SQLException {
+        service.logIn("testi");
+        service.createNewCourse("TEST2", "Test Course", 5);
+        assertFalse(service.createNewCourse("TEST2", "Test Course", 5));
     }
     
+    @Test
+    public void getLoggedInNameWorks() throws SQLException {
+        service.logIn("testi");
+        assertEquals("testiNimi", service.getLoggedInName());
+    }
+    
+    @Test
+    public void getAllStudentsWorks() throws SQLException {
+        assertEquals(1, service.getAllStudents().size());
+    }
     
 
 }

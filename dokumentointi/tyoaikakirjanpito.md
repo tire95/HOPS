@@ -12,4 +12,6 @@ Päivä | Tunnit | Mitä tein
 5.4. | 1h | StackOverflowista SQL- ja dao-asioiden opiskelua
 8.4. | 4h | SQLStudentDao:n viimeistely, JavaFX:n kertaus, checkstylen käyttöönotto, graafisen käyttöliittymän aloitus
 9.4. | 6h | Testien luonti, graafisen käyttöliittymän parantelu, ja muu säätö
-yht. | 26h
+15.4. | 2,5h | Uusia metodeja dao-luokkiin, uuden kurssin luominen mahdollista, admin-näkymä
+16.4. | 2,5h | Lisää testejä, jarin generoinnin mahdollistaminen, sekvenssikaavioita
+yht. | 31h

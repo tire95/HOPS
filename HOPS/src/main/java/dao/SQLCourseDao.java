@@ -109,4 +109,13 @@ public class SQLCourseDao implements CourseDao<Course, Integer, String> {
         }
     }
 
+    @Override
+    public void deleteForStudent(Integer key) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement st = conn.prepareStatement("DELETE FROM Course WHERE studentId = ?");
+            st.setInt(1, key);
+            st.executeUpdate();
+        }
+    }
+
 }

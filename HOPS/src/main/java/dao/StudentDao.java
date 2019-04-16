@@ -15,9 +15,12 @@ import java.util.List;
 public interface StudentDao<T, K, S> {
 
 //    T findById(K key) throws SQLException;
-
     T save(T object) throws SQLException;
 
     T findByUsername(S string) throws SQLException;
+
+    void delete(K key) throws SQLException;
+
+    List<T> findAll() throws SQLException;
 
 }

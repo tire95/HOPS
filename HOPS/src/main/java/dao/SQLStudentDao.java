@@ -38,7 +38,6 @@ public class SQLStudentDao implements StudentDao<Student, Integer, String> {
 //        conn.close();
 //        return s;
 //    }
-
     @Override
     public Student save(Student object) throws SQLException {
         if (findByUsername(object.getUsername()) != null) {
@@ -65,6 +64,29 @@ public class SQLStudentDao implements StudentDao<Student, Integer, String> {
             }
             return new Student(rs.getInt("id"), rs.getString("name"), rs.getString("username"));
         }
+    }
+
+    @Override
+    public void delete(Integer key) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement st = conn.prepareStatement("DELETE FROM Student WHERE id = ?");
+            st.setInt(1, key);
+            st.executeUpdate();
+        }
+    }
+
+    @Override
+    public List<Student> findAll() throws SQLException {
+        List<Student> students = new ArrayList<>();
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement st = conn.prepareStatement("SELECT * FROM Student");
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                students.add(new Student(rs.getInt("id"), rs.getString("name"), rs.getString("username")));
+            }
+        }
+        return students;
     }
 
 }

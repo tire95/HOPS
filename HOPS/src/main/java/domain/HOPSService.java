@@ -52,5 +52,14 @@ public class HOPSService {
     public void logOut() {
         loggedIn = null;
     }
+    
+    public void removeStudentAndCourses(Integer i) throws SQLException {
+        courseDao.deleteForStudent(i);
+        studentDao.delete(i);
+    }
+    
+    public List<Student> getAllStudents() throws SQLException {
+        return studentDao.findAll();
+    }
 
 }

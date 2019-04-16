@@ -26,4 +26,5 @@ public interface CourseDao<T, K, S> {
 
     T findByCode(K key, S string) throws SQLException;
 
+    void deleteForStudent(K key) throws SQLException;
 }
