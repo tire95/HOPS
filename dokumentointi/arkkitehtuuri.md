@@ -4,7 +4,7 @@
 
 Alla oleva kuva esittää ohjelman pakkausrakennetta. Ohjelma noudattaa nelitasoista kerrosarkkitehtuuria.
 
-![pakkausrakenne]
+![pakkausrakenne](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/pakkausrakenne.png)
 
 Pakkaus *ui* sisältää JavaFX:llä toteutetun graafisen käyttöliittymän, *domain* sisältää sovelluslogiikan, *dao* tietojen pysyväistallennuksesta vastaavan koodin, ja *database* tietokantaan yhdistämisestä vastaavan koodin.
 
