@@ -5,12 +5,16 @@
  */
 package ui;
 
+import dao.CourseDao;
 import dao.SQLCourseDao;
 import dao.SQLStudentDao;
+import dao.StudentDao;
 import database.Database;
 import domain.*;
+import java.io.FileInputStream;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -36,25 +40,36 @@ public class HOPSUi extends Application {
     private Scene adminScene;
     private VBox courses;
     private VBox students;
+    private int coursePointsMax;
+    private String adminPassword;
+    private Label loggedInWelcome;
+    private Label totalPointsLabel;
 
     @Override
     public void init() throws Exception {
-        Database database = new Database("jdbc:sqlite:HOPSDatabase.db");
-        SQLStudentDao sDao = new SQLStudentDao(database);
-        SQLCourseDao cDao = new SQLCourseDao(database);
+        Properties properties = new Properties();
+        properties.load(new FileInputStream("config.properties"));
+
+        String databaseAddress = properties.getProperty("database");
+        coursePointsMax = Integer.parseInt(properties.getProperty("coursePointsMax"));
+        adminPassword = properties.getProperty("adminPassword");
+
+        Database database = new Database("jdbc:sqlite:" + databaseAddress);
+        StudentDao sDao = new SQLStudentDao(database);
+        CourseDao cDao = new SQLCourseDao(database);
         this.HOPSService = new HOPSService(sDao, cDao);
         this.courses = new VBox();
         this.students = new VBox();
+        this.loggedInWelcome = new Label();
+        this.totalPointsLabel = new Label();
     }
 
     @Override
     public void start(Stage stage) throws SQLException {
 
-        Label loggedInWelcome = new Label();
-
 //        login screen
         Label guideForLogIn = new Label("Käyttäjätunnus");
-        TextField userNameField = new TextField();
+        TextField userNameInput = new TextField();
         Button logInButton = new Button("Kirjaudu");
         Label logInError = new Label("");
         Button toNewUserScene = new Button("Luo uusi käyttäjä");
@@ -65,7 +80,7 @@ public class HOPSUi extends Application {
 
         GridPane loginPane = new GridPane();
         loginPane.add(guideForLogIn, 0, 0);
-        loginPane.add(userNameField, 0, 1);
+        loginPane.add(userNameInput, 0, 1);
         loginPane.add(logInButton, 1, 1);
         loginPane.add(logInError, 0, 3);
         loginPane.add(toNewUserScene, 0, 2);
@@ -81,7 +96,7 @@ public class HOPSUi extends Application {
 
         toAdminSceneButton.setOnAction(e -> {
             String adminInputText = adminInput.getText();
-            if (adminInputText.equals("salasana1234")) {
+            if (adminInputText.equals(adminPassword)) {
                 adminErrorMsg.setText("");
                 logInError.setText("");
                 getStudents();
@@ -94,11 +109,12 @@ public class HOPSUi extends Application {
 
         logInButton.setOnAction(e -> {
             try {
-                if (HOPSService.logIn(userNameField.getText())) {
+                if (HOPSService.logIn(userNameInput.getText())) {
                     logInError.setText("");
                     adminErrorMsg.setText("");
                     loggedInWelcome.setText("Tervetuloa, " + HOPSService.getLoggedInName());
-                    userNameField.clear();
+                    totalPointsLabel.setText("Opintopisteesi: " + getCoursePoints() + "/" + coursePointsMax);
+                    userNameInput.clear();
                     getCourses();
                     stage.setScene(loggedInScene);
                 } else {
@@ -122,16 +138,16 @@ public class HOPSUi extends Application {
         adminPane.setHgap(10);
         adminPane.setPadding(new Insets(20));
         Label adminLabel = new Label("Tervetuloa admin-näkymään. Täällä voit poistaa opiskelijan ja tähän liittyvät kurssit järjestelmästä.");
-        Button toLogInScene = new Button("Takaisin");
+        Button toLogInSceneButton = new Button("Takaisin");
 
-        toLogInScene.setOnAction(e -> {
+        toLogInSceneButton.setOnAction(e -> {
             adminInput.clear();
             stage.setScene(logInScene);
         });
 
         adminPane.add(adminLabel, 0, 0);
         adminPane.add(students, 0, 1);
-        adminPane.add(toLogInScene, 0, 2);
+        adminPane.add(toLogInSceneButton, 0, 2);
 
         adminScene = new Scene(adminPane);
 
@@ -142,32 +158,32 @@ public class HOPSUi extends Application {
         newUserPane.setHgap(10);
         newUserPane.setPadding(new Insets(20));
 
-        Label newUserName = new Label("Nimi: ");
-        TextField nameInput = new TextField();
-        Label newUserUsername = new Label("Käyttäjätunnus: ");
-        TextField usernameInput = new TextField();
-        Button createUser = new Button("Luo uusi käyttäjä");
+        Label newUserNameLabel = new Label("Nimi: ");
+        TextField newUserNameInput = new TextField();
+        Label newUserUsernameLabel = new Label("Käyttäjätunnus: ");
+        TextField newUserUsernameInput = new TextField();
+        Button createUserButton = new Button("Luo uusi käyttäjä");
         Label newUserErrorMessage = new Label("");
 
-        newUserPane.add(newUserName, 0, 0);
-        newUserPane.add(nameInput, 1, 0);
-        newUserPane.add(newUserUsername, 0, 1);
-        newUserPane.add(usernameInput, 1, 1);
-        newUserPane.add(createUser, 0, 2);
+        newUserPane.add(newUserNameLabel, 0, 0);
+        newUserPane.add(newUserNameInput, 1, 0);
+        newUserPane.add(newUserUsernameLabel, 0, 1);
+        newUserPane.add(newUserUsernameInput, 1, 1);
+        newUserPane.add(createUserButton, 0, 2);
         newUserPane.add(newUserErrorMessage, 1, 2);
 
-        createUser.setOnAction(e -> {
+        createUserButton.setOnAction(e -> {
             try {
-                String name = nameInput.getText();
-                String username = usernameInput.getText();
+                String name = newUserNameInput.getText();
+                String username = newUserUsernameInput.getText();
 
                 if (name.length() < 3 || username.length() < 3) {
                     newUserErrorMessage.setText("Nimi tai käyttäjätunnus liian lyhyt");
                     newUserErrorMessage.setTextFill(Color.RED);
                 } else if (HOPSService.createNewUser(name, username)) {
                     newUserErrorMessage.setText("");
-                    nameInput.clear();
-                    usernameInput.clear();
+                    newUserNameInput.clear();
+                    newUserUsernameInput.clear();
                     logInError.setText("Uusi käyttäjä luotu");
                     logInError.setTextFill(Color.GREEN);
                     stage.setScene(logInScene);
@@ -183,27 +199,27 @@ public class HOPSUi extends Application {
         newUserScene = new Scene(newUserPane);
 
 //        loggedIn screen
-        Button logOut = new Button("Kirjaudu ulos");
+        Button logOutButton = new Button("Kirjaudu ulos");
 
-        logOut.setOnAction(e -> {
+        logOutButton.setOnAction(e -> {
             HOPSService.logOut();
             courses.getChildren().clear();
-            userNameField.clear();
+            userNameInput.clear();
             stage.setScene(logInScene);
         });
-        Button toCreateNewCourse = new Button("Luo uusi kurssi");
+        Button toCreateNewCourseButton = new Button("Luo uusi kurssi");
 
-        toCreateNewCourse.setOnAction(e -> {
+        toCreateNewCourseButton.setOnAction(e -> {
             stage.setScene(newCourseScene);
         });
 
         GridPane loggedInPane = new GridPane();
         loggedInPane.add(loggedInWelcome, 0, 0);
-        loggedInPane.add(logOut, 1, 0);
-        loggedInPane.add(courses, 0, 1);
-        loggedInPane.add(toCreateNewCourse, 0, 2);
+        loggedInPane.add(totalPointsLabel, 0, 1);
+        loggedInPane.add(logOutButton, 1, 0);
+        loggedInPane.add(courses, 0, 2);
+        loggedInPane.add(toCreateNewCourseButton, 0, 3);
 
-//        loggedInPane.setPrefSize(1000, 1000);
         loggedInPane.setVgap(10);
         loggedInPane.setHgap(10);
         loggedInPane.setPadding(new Insets(20));
@@ -211,29 +227,31 @@ public class HOPSUi extends Application {
         loggedInScene = new Scene(loggedInPane);
 
 //        new course creation scene
-        Label courseCode = new Label("Kurssikoodi: ");
-        Label courseName = new Label("Kurssin nimi: ");
-        Label coursePoints = new Label("Kurssin opintopisteet: ");
+        Label courseCodeLabel = new Label("Kurssikoodi: ");
         TextField courseCodeInput = new TextField();
+        HBox courseCodeBox = new HBox();
+        courseCodeBox.getChildren().addAll(courseCodeLabel, courseCodeInput);
+
+        Label courseNameLabel = new Label("Kurssin nimi: ");
         TextField courseNameInput = new TextField();
+        HBox courseNameBox = new HBox();
+        courseNameBox.getChildren().addAll(courseNameLabel, courseNameInput);
+
+        Label coursePointsLabel = new Label("Kurssin opintopisteet: ");
         TextField coursePointsInput = new TextField();
+        HBox coursePointsBox = new HBox();
+        coursePointsBox.getChildren().addAll(coursePointsLabel, coursePointsInput);
+
         Button createNewCourseButton = new Button("Luo uusi kurssi");
         Button backToLoggedInButton = new Button("Takaisin");
+        HBox courseButtonBox = new HBox();
+        courseButtonBox.getChildren().addAll(createNewCourseButton, backToLoggedInButton);
+
         Label courseCreationFailMsg = new Label("");
-        GridPane courseCreationPane = new GridPane();
-//        courseCreationPane.setPrefSize(600, 400);
-        courseCreationPane.setVgap(10);
-        courseCreationPane.setHgap(10);
-        courseCreationPane.setPadding(new Insets(20));
-        courseCreationPane.add(courseCode, 0, 0);
-        courseCreationPane.add(courseCodeInput, 1, 0);
-        courseCreationPane.add(courseName, 0, 1);
-        courseCreationPane.add(courseNameInput, 1, 1);
-        courseCreationPane.add(coursePoints, 0, 2);
-        courseCreationPane.add(coursePointsInput, 1, 2);
-        courseCreationPane.add(createNewCourseButton, 0, 3);
-        courseCreationPane.add(courseCreationFailMsg, 0, 4);
-        courseCreationPane.add(backToLoggedInButton, 1, 3);
+
+        VBox courseBox = new VBox();
+        courseBox.getChildren().addAll(courseCodeBox, courseNameBox, coursePointsBox, courseButtonBox, courseCreationFailMsg);
+        courseBox.setPadding(new Insets(20));
 
         createNewCourseButton.setOnAction(e -> {
             try {
@@ -265,6 +283,7 @@ public class HOPSUi extends Application {
                     courseNameInput.clear();
                     coursePointsInput.clear();
                     getCourses();
+                    totalPointsLabel.setText("Opintopisteesi: " + getCoursePoints() + "/" + coursePointsMax);
                     stage.setScene(loggedInScene);
                 } else {
                     courseCreationFailMsg.setText("Kyseisellä koodilla tai nimellä on jo kurssi");
@@ -280,7 +299,7 @@ public class HOPSUi extends Application {
             stage.setScene(loggedInScene);
         });
 
-        newCourseScene = new Scene(courseCreationPane);
+        newCourseScene = new Scene(courseBox);
 
         stage.setTitle("HOPS");
         stage.setScene(logInScene);
@@ -294,13 +313,32 @@ public class HOPSUi extends Application {
             List<Course> coursesList = HOPSService.getAllCourses();
             if (!coursesList.isEmpty()) {
                 coursesList.forEach(course -> {
-                    courses.getChildren().add(new Label(course.toString()));
+                    courses.getChildren().add(createCourseNode(course));
                 });
             }
         } catch (SQLException ex) {
             Logger.getLogger(HOPSUi.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    private Node createCourseNode(Course c) {
+        HBox box = new HBox();
+        box.setSpacing(10);
+        Label courseLabel = new Label(c.toString());
+        Button courseButton = new Button("Poista kurssi");
+
+        courseButton.setOnAction(e -> {
+            try {
+                HOPSService.removeCourse(c.getId());
+                getCourses();
+                totalPointsLabel.setText("Opintopisteesi: " + getCoursePoints() + "/" + coursePointsMax);
+            } catch (SQLException ex) {
+                Logger.getLogger(HOPSUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        box.getChildren().addAll(courseLabel, courseButton);
+        return box;
     }
 
     private void getStudents() {
@@ -319,6 +357,7 @@ public class HOPSUi extends Application {
 
     private Node createStudentNode(Student s) {
         HBox box = new HBox();
+        box.setSpacing(10);
         Label studentLabel = new Label(s.getName());
         Button studentButton = new Button("Poista opiskelija");
 
@@ -332,6 +371,19 @@ public class HOPSUi extends Application {
         });
         box.getChildren().addAll(studentLabel, studentButton);
         return box;
+    }
+
+    private int getCoursePoints() {
+        int i = 0;
+        try {
+            List<Course> coursesList = HOPSService.getAllCourses();
+            if (!coursesList.isEmpty()) {
+                i = coursesList.stream().map((c) -> c.getPoints()).reduce(i, Integer::sum);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HOPSUi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return i;
     }
 
     public static void main(String[] args) throws SQLException {

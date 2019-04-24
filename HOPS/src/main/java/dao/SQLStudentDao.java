@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author timo
  */
-public class SQLStudentDao implements StudentDao<Student, Integer, String> {
+public class SQLStudentDao implements StudentDao {
 
     private final Database database;
 
@@ -21,23 +21,6 @@ public class SQLStudentDao implements StudentDao<Student, Integer, String> {
         this.database = database;
     }
 
-//    @Override
-//    public Student findById(Integer key) throws SQLException {
-//        Connection conn = database.getConnection();
-//        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Student WHERE id = ?");
-//        stmt.setInt(1, key);
-//
-//        ResultSet rs = stmt.executeQuery();
-//        if (!rs.next()) {
-//            return null;
-//        }
-//        Student s = new Student(rs.getInt("id"), rs.getString("name"), rs.getString("username"));
-//
-//        stmt.close();
-//        rs.close();
-//        conn.close();
-//        return s;
-//    }
     @Override
     public Student save(Student object) throws SQLException {
         if (findByUsername(object.getUsername()) != null) {

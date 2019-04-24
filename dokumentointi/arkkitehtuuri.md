@@ -1,10 +1,45 @@
 # Arkkitehtuuri
 
+## Rakenne
+
+Alla oleva kuva esittää ohjelman pakkausrakennetta. Ohjelma noudattaa nelitasoista kerrosarkkitehtuuria.
+
+![pakkausrakenne]
+
+Pakkaus *ui* sisältää JavaFX:llä toteutetun graafisen käyttöliittymän, *domain* sisältää sovelluslogiikan, *dao* tietojen pysyväistallennuksesta vastaavan koodin, ja *database* tietokantaan yhdistämisestä vastaavan koodin.
+
+## Käyttöliittymä
+
+Käyttöliittymässä on kuusi eri näkymää:
+
+- aloitusruutu
+- sisäänkirjautuminen
+- uuden käyttäjän luominen
+- kurssien listaus
+- uuden kurssin luominen
+- admin-näkymä
+
+Jokainen näkymistä on toteutettu Scene-oliona, jotka ovat yksi kerrallaan näkyvänä. Käyttöliittymä on eristetty sovelluslogiikasta.
+
+Kun kurssilista muuttuu, eli kun käyttäjä kirjautuu sisään tai lisää itselleen uuden kurssisuorituksen, kutsutaan metodia *getCourses*, joka päivittää kurssilistan.
+
+Admin-näkymään kirjautuminen vaatii salasanan, joka voidaan vaihtaa juurikansiossa olevasta *config.properties*-tiedostosta. Kun admin-näkymässä poistetaan opiskelija, kutsutaan metodia *getStudents*, joka päivittää opiskelijalistan.
+
 ## Sovelluslogiikka
 
-Alla oleva luokkakaavio kuvaa ohjelman sovelluslogiikkaa.
+Sovelluslogiikasta vastaa luokka *HOPSService*, joka tarjoaa käyttöliittymän toiminnoille sopivat metodit. *HOPSService* pääsee käsiksi opiskelijoihin ja kursseihin pakkauksessa *dao* rajapinnat *StudentDao* ja *CourseDao* täyttävien luokkien kautta.
+
+Alla oleva luokkakaavio kuvaa ohjelman eri osien suhdetta toisiinsa.
 
 ![luokkakaavio](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/luokkakaavio.png)
+
+## Tietojen pysyväistallennus
+
+Opiskelijat ja kurssisuoritukset tallennetaan SQL-tietokantaan. Tästä huolehtii pakkauksen *dao* luokat *SQLStudentDao* ja *SQLCourseDao*.
+
+Luokat noudattavat Data Access Object -suunnittelumallia, ja tarvittaessa ne voidaan korvata uusilla toteutuksilla, jos tietoja halutaan tallentaa muilla tavoilla.
+
+SQL-tietokannan nimen voi vaihtaa tiedostosta config.properties, joka sijaitsee juurikansiossa. 
 
 ## Sekvenssikaaviot
 
@@ -14,10 +49,12 @@ Alla oleva sekvenssikaavio kuvaa tilannetta, kun käyttäjä kirjautuu järjeste
 
 ![logIn](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/logInSequence.png)
 
-Kun käyttäjä painaa sisäänkirjautumisnappia, tapahtumankäsittelijä kutsuu HOPSService:n login-metodia parametrina käyttäjän antama käyttäjätunnus. HOPSService määrittää studentDao:n kautta, löytyykö kyseisellä käyttäjätunnuksella opiskelijaa. Jos opiskelija löytyy, studentDao palauttaa kyseisen opiskelijan, HOPSService asettaa kyseisen opiskelijan sisäänkirjautuneeksi, palauttaa *true* HOPSUi:lle. Tämän jälkeen HOPSUi kutsuu omaa metodiaan *getCourses()*, jossa HOPSUi kutsuu HOPSService:n *getAllCourses()*-metodia. Sisäänkirjautuneen opiskelijan id haetaan, ja tämän perusteella etsitään opiskelijan kaikki kurssit courseDao:sta metodilla *findAllForStudent(id)*. Tämä palauttaa listan *courses* HOPSService:lle, joka edelleen palauttaa listan HOPSUi:lle, joka tämän perusteella päivittää kurssilistan näkymään. Tämän jälkeen HOPSUi vaihtaa näkymän *loggedInScene*:n.
+Kun käyttäjä painaa sisäänkirjautumisnappia, tapahtumankäsittelijä kutsuu *HOPSService*:n login-metodia parametrina käyttäjän antama käyttäjätunnus. *HOPSService* määrittää *studentDao*:n kautta, löytyykö kyseisellä käyttäjätunnuksella opiskelijaa. Jos opiskelija löytyy, *studentDao* palauttaa kyseisen opiskelijan, *HOPSService* asettaa kyseisen opiskelijan sisäänkirjautuneeksi ja palauttaa *true* *HOPSUi*:lle. Tämän jälkeen *HOPSUi* kutsuu omaa metodiaan *getCourses*, jossa *HOPSUi* kutsuu *HOPSService*:n *getAllCourses*-metodia. Sisäänkirjautuneen opiskelijan id haetaan, ja tämän perusteella etsitään opiskelijan kaikki kurssit *courseDao*:sta metodilla *findAllForStudent(id)*. Tämä palauttaa listan *courses* *HOPSService*:lle, joka edelleen palauttaa listan *HOPSUi*:lle, joka tämän perusteella päivittää kurssilistan näkymään. Tämän jälkeen *HOPSUi* vaihtaa näkymän *loggedInScene*:n.
 
 ### Uuden opiskelijan luonti
 
 Alla oleva sekvenssikaavio kuvaa tilannetta, kun käyttäjä luo uuden opiskelijan järjestelmään
 
 ![createStudent](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/createNewStudentSequence.png)
+
+Kun käyttäjä painaa *newUserButton*:aa, tapahtumankäsittelijä vaihtaa ui:n uuden opiskelijan luontia varten tehtyyn *Scene*:n. Kun tämän jälkeen painaa *createUserButton*:a, *HOPSUi* kutsuu *HOPSService*:n *createNewUser*-metodia, jolle annetaan käyttäjän syöttämät nimi ja käyttäjätunnus parametreina. *HOPSService* luo uuden opiskelijan annetuilla parametreilla ja asettaa tämän id:n tilapäisesti arvoon -1. Tämän jälkeen *HOPSService* kutsuu *studentDao*:n metodia *save(student)* antaen parametrina juuri luodun opiskelijan. *studentDao* aluksi tarkistaa metodilla *findByUsername*, että annetulla käyttäjätunnuksella ei löydy opiskelijaa tietokannasta, ja palauttaa itselleen arvon *null* jos näin on. Tämän jälkeen *studentDao* tallentaa opiskelijan tietokantaan; tässä vaiheessa opiskelijan id määräytyy tietokannassa olevien opiskelijoiden määrän mukaan. Kun opiskelija on luotu, *studentDao* kutsuu metodiaan *findByUsername*, joka palauttaa juuri luodun opiskelijan. Tämä palautetaan edelleen *HOPSService*:lle, joka taas palauttaa *true* *HOPSUi*:lle. *HOPSUi* asettaa tämän jälkeen näkymän sisäänkirjautumisruutuun.

@@ -14,4 +14,8 @@ Päivä | Tunnit | Mitä tein
 9.4. | 6h | Testien luonti, graafisen käyttöliittymän parantelu, ja muu säätö
 15.4. | 2,5h | Uusia metodeja dao-luokkiin, uuden kurssin luominen mahdollista, admin-näkymä
 16.4. | 2,5h | Lisää testejä, jarin generoinnin mahdollistaminen, sekvenssikaavioita
-yht. | 31h
+17.4. | 1h | JavaDocin aloitus
+19.4. | 1,5h | daojen testaukset
+22.4. | 0,5h | opiskelijan kurssipisteiden summan tulostus, config.properties ja yksittäisen kurssin poistaminen
+24.4. | 1,5h | arkkitehtuurin ja käyttöohjeen päivitys
+yht. | 35,5h

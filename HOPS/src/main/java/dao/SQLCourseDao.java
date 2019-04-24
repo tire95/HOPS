@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import database.Database;
@@ -18,17 +13,12 @@ import java.util.List;
  *
  * @author timo
  */
-public class SQLCourseDao implements CourseDao<Course, Integer, String> {
+public class SQLCourseDao implements CourseDao {
 
     private final Database database;
 
     public SQLCourseDao(Database database) {
         this.database = database;
-    }
-
-    @Override
-    public Course findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -44,7 +34,6 @@ public class SQLCourseDao implements CourseDao<Course, Integer, String> {
                 courses.add(new Course(rs.getInt("id"), rs.getInt("studentId"), rs.getString("code"), rs.getString("name"), rs.getInt("points")));
             }
         }
-
         return courses;
     }
 

@@ -5,6 +5,7 @@
  */
 package dao;
 
+import domain.Course;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,19 +13,17 @@ import java.util.List;
  *
  * @author timo
  */
-public interface CourseDao<T, K, S> {
+public interface CourseDao {
 
-    T findOne(K key) throws SQLException;
+    List<Course> findAllForStudent(Integer key) throws SQLException;
 
-    List<T> findAllForStudent(K key) throws SQLException;
+    Course save(Course course) throws SQLException;
 
-    T save(T object) throws SQLException;
+    void delete(Integer key) throws SQLException;
 
-    void delete(K key) throws SQLException;
+    Course findByName(Integer key, String string) throws SQLException;
 
-    T findByName(K key, S string) throws SQLException;
+    Course findByCode(Integer key, String string) throws SQLException;
 
-    T findByCode(K key, S string) throws SQLException;
-
-    void deleteForStudent(K key) throws SQLException;
+    void deleteForStudent(Integer key) throws SQLException;
 }

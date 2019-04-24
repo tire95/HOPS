@@ -46,29 +46,14 @@ public class StudentTest {
         assertEquals(1, arto.getId());
     }
     
-
-//    @Test
-//    public void equalWhenSameUsername() {
-//        Student arto2 = new Student(2, "Arto", "akke");
-//        assertTrue(arto.equals(arto2));
-//    }
-//
-//    @Test
-//    public void notEqualWhenDifferentUsername() {
-//        Student timo = new Student(3, "Timo", "tirppa");
-//        assertFalse(arto.equals(timo));
-//    }
-//
-//    @Test
-//    public void notEqualWhenDifferentType() {
-//        Object o = new Object();
-//        assertFalse(arto.equals(o));
-//    }
-//    
-//    @Test
-//    public void equalWhenSameId() {
-//        Student arto2 = new Student(1, "sadadsa", "asddsadsa");
-//        assertTrue(arto.equals(arto2));
-//    }
+    @Test
+    public void getNameWorks() {
+        assertEquals("Arto", arto.getName());
+    }
+    
+    @Test
+    public void getUsernameWorks() {
+        assertEquals("akke", arto.getUsername());
+    }
 
 }

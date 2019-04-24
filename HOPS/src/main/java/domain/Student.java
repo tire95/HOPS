@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
 
 /**
- *
- * @author timo
+ * Käyttäjää/opiskelijaa kuvaava luokka
  */
+
 public class Student {
     private final int id;
     private final String name;
@@ -32,20 +27,4 @@ public class Student {
     public String getUsername() {
         return username;
     }
-        
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (!(obj instanceof Student)) {
-//            return false;
-//        }
-//        
-//        Student other = (Student) obj;
-//        if (this.id == other.getId()) {
-//            return true;
-//        }
-//        return this.username.equals(other.getUsername());
-//    }
-
-    
-    
 }

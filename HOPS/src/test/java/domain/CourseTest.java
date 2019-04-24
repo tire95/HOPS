@@ -33,12 +33,37 @@ public class CourseTest {
 
     @Before
     public void setUp() {
-        testCourse = new Course(1, 1, "TEST2", "TestCourse", 5);
+        testCourse = new Course(1, 2, "TKT20002", "Ohjelmistotekniikka", 5);
     }
 
     @After
     public void tearDown() {
     }
-
+    
+    @Test
+    public void getIdWorks() {
+        assertEquals(1, testCourse.getId());
+    }
+    
+    @Test
+    public void getStudentIdWorks() {
+        assertEquals(2, testCourse.getStudentId());
+    }
+    
+    @Test
+    public void getNameWorks() {
+        assertEquals("Ohjelmistotekniikka", testCourse.getName());
+    }
+    
+    @Test
+    public void getCodeWorks() {
+        assertEquals("TKT20002", testCourse.getCode());
+    }
+    
+    @Test
+    public void getPointsWorks() {
+        assertEquals(5, testCourse.getPoints());
+    }
+ 
 
 }

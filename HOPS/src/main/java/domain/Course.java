@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
-
 /**
- *
- * @author timo
+ * Yksittäistä kurssisuoritusta kuvaava luokka
  */
+
 public class Course {
 
     private final int id;
@@ -50,21 +44,5 @@ public class Course {
     public String toString() {
         return "Kurssikoodi: " + code + ", kurssinimi: " + name + ", opintopisteitä: " + points;
     }
-
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (!(obj instanceof Course)) {
-//            return false;
-//        }
-//        Course other = (Course) obj;
-//        
-//        if (this.id == other.getId()) {
-//            return true;
-//        }
-//        if (this.code.equals(other.getCode())) {
-//            return true;
-//        }
-//        return this.name.equals(other.getName());
-//    }
 
 }
