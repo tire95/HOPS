@@ -16,7 +16,11 @@ Admin-tilassa tietokannasta voi poistaa opiskelijoita; kun opiskelija poistetaan
 
 [Arkkitehtuuri](https://github.com/tire95/HOPS/blob/master/dokumentointi/arkkitehtuuri.md)
 
-[Releases](https://github.com/tire95/HOPS/releases)
+[Käyttöohje](https://github.com/tire95/HOPS/blob/master/dokumentointi/kayttoohje.md)
+
+## Releaset
+
+[Viikko 5 (pre-release)](https://github.com/tire95/HOPS/releases/tag/viikko5)
 
 ## Komentorivitoiminnot
 
@@ -45,6 +49,12 @@ Suoritettava jar voidaan luoda komennolla
 	mvn package
 
 Luotu jar-tiedosto, *HOPS-1.0-SNAPSHOT.jar*, löytyy kansiosta *target*
+
+### JavaDoc
+
+JavaDoc generoidaan komennolla
+
+	mvn javadoc:javadoc
 
 ### Checkstyle
 
