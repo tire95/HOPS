@@ -16,6 +16,8 @@ Admin-tilassa tietokannasta voi poistaa opiskelijoita; kun opiskelija poistetaan
 
 [Arkkitehtuuri](https://github.com/tire95/HOPS/blob/master/dokumentointi/arkkitehtuuri.md)
 
+[Releases](https://github.com/tire95/HOPS/releases)
+
 ## Komentorivitoiminnot
 
 ### Testaus
