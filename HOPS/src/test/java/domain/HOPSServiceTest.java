@@ -7,6 +7,7 @@ package domain;
 
 import dao.SQLCourseDao;
 import dao.SQLStudentDao;
+import dao.StudentDao;
 import database.Database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +28,7 @@ public class HOPSServiceTest {
 
     HOPSService service;
     Database testDatabase;
-    SQLStudentDao sd;
+    StudentDao sd;
 
     public HOPSServiceTest() throws SQLException {
         testDatabase = new Database("jdbc:sqlite:testDatabase.db");

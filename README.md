@@ -8,6 +8,8 @@ Kirjauduttuaan sisään käyttäjä näkee kurssisuorituksensa ja voi lisätä i
 
 Admin-tilassa tietokannasta voi poistaa opiskelijoita; kun opiskelija poistetaan järjestelmästä, tähän liittyvät kurssisuoritukset poistetaan samalla.
 
+Sovelluksen käyttämän tietokannan nimen, maksimiopintopisteiden määrän, ja admin-salasanan voi vaihtaa *config.properties*-tiedostosta, joka sijaitsee juurikansiossa.
+
 ## Dokumentaatio
 
 [Vaatimusmäärittely](https://github.com/tire95/HOPS/blob/master/dokumentointi/vaatimusmaarittely.md)

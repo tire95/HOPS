@@ -12,7 +12,6 @@ Pakkaus *ui* sisältää JavaFX:llä toteutetun graafisen käyttöliittymän, *d
 
 Käyttöliittymässä on kuusi eri näkymää:
 
-- aloitusruutu
 - sisäänkirjautuminen
 - uuden käyttäjän luominen
 - kurssien listaus
