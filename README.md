@@ -1,4 +1,4 @@
-# Ohjelmistotekniikka, harjoitustyö - HOPS 1
+# Ohjelmistotekniikka, harjoitustyö - HOPS
 
 Sovelluksen avulla opiskelija pystyy seuraamaan opintojensa edistymistä.
 
@@ -23,6 +23,8 @@ Sovelluksen käyttämän tietokannan nimen, maksimiopintopisteiden määrän, ja
 ## Releaset
 
 [Viikko 5 (pre-release)](https://github.com/tire95/HOPS/releases/tag/viikko5)
+
+[Viiko 6 (pre-release)](https://github.com/tire95/HOPS/releases/tag/viikko6)
 
 ## Komentorivitoiminnot
 
