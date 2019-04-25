@@ -49,7 +49,3 @@ Kirjauduttuasi sisään paina *Luo uusi kurssi* -nappia. Näkymä siirtyy kurssi
 ![newCourseScreen](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/newCourseScreen.png)
 
 Paina *Luo uusi kurssi* -nappia. Näkymä siirtyy kurssilistausnäkymään.
-
-Luotuasi muutaman kurssin, kurssilistausnäkymä näyttää seuraavanlaiselta:
-
-![courseScreen2](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/courseScreen2.png)
