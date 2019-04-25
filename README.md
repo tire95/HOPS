@@ -1,4 +1,4 @@
-# Ohjelmistotekniikka, harjoitustyö - HOPS
+# Ohjelmistotekniikka, harjoitustyö - HOPS 1
 
 Sovelluksen avulla opiskelija pystyy seuraamaan opintojensa edistymistä.
 
