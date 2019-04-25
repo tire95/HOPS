@@ -15,15 +15,15 @@ import java.util.List;
  */
 public interface CourseDao {
 
-    List<Course> findAllForStudent(Integer key) throws SQLException;
+    List<Course> findAllForStudent(Integer studentId) throws SQLException;
 
     Course save(Course course) throws SQLException;
 
-    void delete(Integer key) throws SQLException;
+    void delete(Integer courseId) throws SQLException;
 
-    Course findByName(Integer key, String string) throws SQLException;
+    Course findByName(Integer studentId, String courseName) throws SQLException;
 
-    Course findByCode(Integer key, String string) throws SQLException;
+    Course findByCode(Integer studentId, String courseCode) throws SQLException;
 
-    void deleteForStudent(Integer key) throws SQLException;
+    void deleteForStudent(Integer studentId) throws SQLException;
 }

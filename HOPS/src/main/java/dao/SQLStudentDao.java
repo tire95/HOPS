@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author timo
+ * dao-luokka opiskelijoiden käsittelyyn SQL-tietokannassa
  */
 public class SQLStudentDao implements StudentDao {
 
@@ -21,20 +20,33 @@ public class SQLStudentDao implements StudentDao {
         this.database = database;
     }
 
+    /**
+     * Opiskelijan tallennus tietokantaan
+     * @param student opiskelija
+     * @see dao.SQLStudentDao#findByUsername(java.lang.String) 
+     * @return null, jos opiskelija löytyy jo, tai juuri luotu opiskelija
+     * @throws SQLException 
+     */
     @Override
-    public Student save(Student object) throws SQLException {
-        if (findByUsername(object.getUsername()) != null) {
+    public Student save(Student student) throws SQLException {
+        if (findByUsername(student.getUsername()) != null) {
             return null;
         }
         try (Connection conn = database.getConnection()) {
             PreparedStatement st = conn.prepareStatement("INSERT INTO Student (name, username) VALUES (?,?)");
-            st.setString(1, object.getName());
-            st.setString(2, object.getUsername());
+            st.setString(1, student.getName());
+            st.setString(2, student.getUsername());
             st.executeUpdate();
         }
-        return findByUsername(object.getUsername());
+        return findByUsername(student.getUsername());
     }
 
+    /**
+     * Opiskelijan etsiminen käyttäjätunnuksen perusteella
+     * @param username opiskelijan käyttäjätunnus
+     * @return null jos opiskelijaa ei löydy, tai opiskelija
+     * @throws SQLException 
+     */
     @Override
     public Student findByUsername(String username) throws SQLException {
         try (Connection conn = database.getConnection()) {
@@ -49,15 +61,25 @@ public class SQLStudentDao implements StudentDao {
         }
     }
 
+    /**
+     * Opiskelijan poisto
+     * @param id opiskelijan id
+     * @throws SQLException 
+     */
     @Override
-    public void delete(Integer key) throws SQLException {
+    public void delete(Integer id) throws SQLException {
         try (Connection conn = database.getConnection()) {
             PreparedStatement st = conn.prepareStatement("DELETE FROM Student WHERE id = ?");
-            st.setInt(1, key);
+            st.setInt(1, id);
             st.executeUpdate();
         }
     }
 
+    /**
+     * Kaikkien opiskelijoiden etsiminen
+     * @return lista opiskelijoista
+     * @throws SQLException 
+     */
     @Override
     public List<Student> findAll() throws SQLException {
         List<Student> students = new ArrayList<>();

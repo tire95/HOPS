@@ -21,12 +21,9 @@ public class HOPSService {
 
     /**
      * Uuden opiskelijan luonti
-     * 
      * @param name luotavan opiskelijan nimi
      * @param username luotavan opiskelijan käyttäjänimi
-     * 
      * @see dao.SQLStudentDao#save(domain.Student) 
-     * 
      * @return totuusarvo, onnistuiko luotavan käyttäjän luonti
      * @throws SQLException 
      */
@@ -37,11 +34,8 @@ public class HOPSService {
 
     /**
      * Sisäänkirjautuminen
-     * 
      * @param username sisäänkirjautuvan opiskelijan käyttäjätunnus
-     * 
      * @see dao.SQLStudentDao#findByUsername(String) 
-     * 
      * @return totuusarvo, onnistuiko sisäänkirjautuminen
      * @throws SQLException 
      */
@@ -52,9 +46,7 @@ public class HOPSService {
 
     /**
      * Kirjautuneen opiskelija kurssisuorituksien haku
-     * 
      * @see dao.SQLCourseDao#findAllForStudent(java.lang.Integer)  
-     * 
      * @return listan opiskelijan kursseista
      * @throws SQLException 
      */
@@ -65,13 +57,10 @@ public class HOPSService {
 
     /**
      * Uuden kurssisuorituksen lisääminen sisäänkirjautuneelle opiskelijalle
-     * 
      * @param code kurssisuorituksen kurssikoodi
      * @param name kurssisuorituksen nimi
      * @param points kurssisuorituksen opintopisteet
-     * 
      * @see dao.SQLCourseDao#save(domain.Course) 
-     * 
      * @return totuusarvo, onnistuiko uuden kurssisuorituksen luonti
      * @throws SQLException 
      */
@@ -82,9 +71,7 @@ public class HOPSService {
     
     /**
      * Sisäänkirjautuneen opiskelijan nimen haku
-     * 
      * @see domain.Student#getName() 
-     * 
      * @return sisäänkirjautuneen opiskelijan nimi
      */
     public String getLoggedInName() {
@@ -100,12 +87,9 @@ public class HOPSService {
     
     /**
      * Tietyn opiskelijan ja tämän kurssisuoritusten poisto järjestelmästä
-     * 
      * @param i opiskelijan id
-     * 
      * @see dao.SQLCourseDao#deleteForStudent(java.lang.Integer) 
-     * @see dao.SQLStudentDao#delete(int) 
-     * 
+     * @see dao.SQLStudentDao#delete(java.lang.Integer) 
      * @throws SQLException 
      */
     public void removeStudentAndCourses(Integer i) throws SQLException {
@@ -116,9 +100,7 @@ public class HOPSService {
     
     /**
      * Kaikkien järjestelmässä olevien opiskelijoiden etsiminen
-     * 
      * @see dao.SQLStudentDao#findAll() 
-     * 
      * @return lista opiskelijoista
      * @throws SQLException 
      */
@@ -128,11 +110,8 @@ public class HOPSService {
     
     /**
      * Kurssin poistaminen
-     * 
      * @param i kurssin id
-     * 
      * @see dao.SQLCourseDao#delete(java.lang.Integer) 
-     * 
      * @throws SQLException 
      */
     public void removeCourse(Integer i) throws SQLException {

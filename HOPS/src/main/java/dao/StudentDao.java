@@ -15,12 +15,11 @@ import java.util.List;
  */
 public interface StudentDao {
 
-//    T findById(K key) throws SQLException;
     Student save(Student student) throws SQLException;
 
-    Student findByUsername(String string) throws SQLException;
+    Student findByUsername(String username) throws SQLException;
 
-    void delete(Integer key) throws SQLException;
+    void delete(Integer id) throws SQLException;
 
     List<Student> findAll() throws SQLException;
 
