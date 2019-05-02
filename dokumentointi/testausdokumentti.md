@@ -10,7 +10,7 @@ Luokille *Student* ja *Course* on luotu yksikkötestejä, ja luokille *HOPSServi
 
 Käyttöliittymää lukuunottamatta testausten rivi- ja haarautumakattavuus ovat kummatkin 100%.
 
-![testikattavuus]()
+![testikattavuus](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/testikattavuus.png)
 
 ## Järjestelmätestaus
 
