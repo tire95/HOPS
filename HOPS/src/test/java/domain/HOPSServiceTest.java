@@ -131,5 +131,21 @@ public class HOPSServiceTest {
         service.removeStudentAndCourses(justCreated.getId());
         assertNull(sd.findByUsername("testi2"));
     }
+    
+    @Test
+    public void removingCourseRemovesCourse() throws SQLException {
+        service.logIn("testi");
+        service.createNewCourse("TEST1", "testi 1", 5);
+        service.removeCourse(1);
+        assertEquals(0, service.getAllCourses().size());
+    }
+    
+    @Test
+    public void loggingOutWorks() throws SQLException {
+        service.logIn("testi");
+        assertEquals("testiNimi", service.getLoggedInName());
+        service.logOut();
+        assertNull(service.getLoggedInName());
+    }
 
 }

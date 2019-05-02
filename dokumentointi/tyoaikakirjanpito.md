@@ -19,4 +19,6 @@ Päivä | Tunnit | Mitä tein
 22.4. | 0,5h | opiskelijan kurssipisteiden summan tulostus, config.properties ja yksittäisen kurssin poistaminen
 24.4. | 1,5h | arkkitehtuurin ja käyttöohjeen päivitys
 25.4. | 2h | JavaDoc dao-luokille, käyttöohje
-yht. | 37,5h
+29.4. | 1h | graafisen käyttöliittymän muokkaus
+2.5. | 3,5h | dokumentoinnin, testien ja JavaDocin päivitystä, ikkuna virheiden catchaamista varten
+yht. | 42h

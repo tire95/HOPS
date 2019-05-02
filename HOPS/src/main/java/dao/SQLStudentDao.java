@@ -10,12 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * dao-luokka opiskelijoiden käsittelyyn SQL-tietokannassa
+ * dao-rajapinnan toteuttava luokka opiskelijoiden käsittelyyn SQL-tietokannassa
  */
 public class SQLStudentDao implements StudentDao {
 
     private final Database database;
 
+    /**
+     * Konstruktori
+     * @param database tietokanta
+     */
     public SQLStudentDao(Database database) {
         this.database = database;
     }

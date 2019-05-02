@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [hopsapp.jar]()
+Lataa tiedostot [hopsapp.jar ja config.properties]()
 
 ## Konfigurointi
 
@@ -42,10 +42,26 @@ Kirjauduttuasi sisään näkymä on seuraavanlainen:
 
 ![courseScreen](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/courseScreen.png)
 
-## Uusien kurssisuoritusten luonti
+## Uusien kurssisuoritusten luonti ja kurssisuoritusten poisto
 
 Kirjauduttuasi sisään paina *Luo uusi kurssi* -nappia. Näkymä siirtyy kurssinluontinäkymään. Kirjoita syötekenttiin kurssikoodi, kurssin nimi ja opintopisteet. Kurssikoodin ja nimen pitää olla uniikkeja, ja opintopisteiden pitää olla kokonaisluku.
 
 ![newCourseScreen](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/newCourseScreen.png)
 
 Paina *Luo uusi kurssi* -nappia. Näkymä siirtyy kurssilistausnäkymään.
+
+![courseScreen2]()
+
+Jos haluat poistaa kurssisuorituksen, paina kurssisuorituksen vieressä olevaa *Poista kurssi* -nappia.
+
+## Admin-näkymä
+
+Admin-näkymää varten kirjoita admin-salasana sisäänkirjautumisruudussa.
+
+![toAdminScreen]()
+
+Admin-näkymä näyttää seuraavanlaiselta:
+
+![adminSceen]()
+
+Admin-näkymässä voit poistaa opiskelijan ja tähän liittyvät kurssisuoritukset painamalla opiskelijan käyttäjätunnuksen viereistä *Poista opiskelija* -nappia.

@@ -2,7 +2,7 @@
 
 ## Rakenne
 
-Alla oleva kuva esittää ohjelman pakkausrakennetta. Ohjelma noudattaa nelitasoista kerrosarkkitehtuuria.
+Alla oleva kuva esittää ohjelman pakkausrakennetta.
 
 ![pakkausrakenne](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/pakkausrakenne.png)
 
@@ -26,9 +26,7 @@ Admin-näkymään kirjautuminen vaatii salasanan, joka voidaan vaihtaa juurikans
 
 ## Sovelluslogiikka
 
-Sovelluslogiikasta vastaa luokka *HOPSService*, joka tarjoaa käyttöliittymän toiminnoille sopivat metodit. *HOPSService* pääsee käsiksi opiskelijoihin ja kursseihin pakkauksessa *dao* rajapinnat *StudentDao* ja *CourseDao* täyttävien luokkien kautta.
-
-Alla oleva luokkakaavio kuvaa ohjelman eri osien suhdetta toisiinsa.
+Sovelluslogiikasta vastaa luokka *HOPSService*, joka tarjoaa käyttöliittymän toiminnoille sopivat metodit. Alla oleva luokkakaavio kuvaa ohjelman eri osien suhdetta toisiinsa.
 
 ![luokkakaavio](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/luokkakaavio.png)
 
@@ -36,9 +34,23 @@ Alla oleva luokkakaavio kuvaa ohjelman eri osien suhdetta toisiinsa.
 
 Opiskelijat ja kurssisuoritukset tallennetaan SQL-tietokantaan. Tästä huolehtii pakkauksen *dao* luokat *SQLStudentDao* ja *SQLCourseDao*.
 
+Alla oleva tietokantakaavio kuvaa tietokantataulujen suhteen toisiinsa.
+
+![tietokantakaavio]()
+
 Luokat noudattavat Data Access Object -suunnittelumallia, ja tarvittaessa ne voidaan korvata uusilla toteutuksilla, jos tietoja halutaan tallentaa muilla tavoilla.
 
-SQL-tietokannan nimen voi vaihtaa tiedostosta config.properties, joka sijaitsee juurikansiossa. 
+SQL-tietokannan nimen voi vaihtaa tiedostosta *config.properties*, joka sijaitsee juurikansiossa.
+
+## Sovelluksen konfigurointi
+
+Tiedoston *config.properties* avulla voidaan konfiguroida sovellusta. Tiedoston rakenne on seuraavanlainen: 
+
+	database=HOPSDatabase.db
+	coursePointsMax=180
+	adminPassword=salasana1234
+
+Muuttamalla kohdan *database* parametria voidaan valita, minkä nimistä SQL-tietokantaa sovellus käyttää. Kohta *coursePointsMax* määrittää sovelluksessa näkyvän opintopisteiden ylärajan. *adminPassword* määrittää admin-salasanan, jolla voidaan kirjautua admin-näkymään. 
 
 ## Sekvenssikaaviot
 
@@ -56,4 +68,4 @@ Alla oleva sekvenssikaavio kuvaa tilannetta, kun käyttäjä luo uuden opiskelij
 
 ![createStudent](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/createNewStudentSequence.png)
 
-Kun käyttäjä painaa *newUserButton*:aa, tapahtumankäsittelijä vaihtaa ui:n uuden opiskelijan luontia varten tehtyyn *Scene*:n. Kun tämän jälkeen painaa *createUserButton*:a, *HOPSUi* kutsuu *HOPSService*:n *createNewUser*-metodia, jolle annetaan käyttäjän syöttämät nimi ja käyttäjätunnus parametreina. *HOPSService* luo uuden opiskelijan annetuilla parametreilla ja asettaa tämän id:n tilapäisesti arvoon -1. Tämän jälkeen *HOPSService* kutsuu *studentDao*:n metodia *save(student)* antaen parametrina juuri luodun opiskelijan. *studentDao* aluksi tarkistaa metodilla *findByUsername*, että annetulla käyttäjätunnuksella ei löydy opiskelijaa tietokannasta, ja palauttaa itselleen arvon *null* jos näin on. Tämän jälkeen *studentDao* tallentaa opiskelijan tietokantaan; tässä vaiheessa opiskelijan id määräytyy tietokannassa olevien opiskelijoiden määrän mukaan. Kun opiskelija on luotu, *studentDao* kutsuu metodiaan *findByUsername*, joka palauttaa juuri luodun opiskelijan. Tämä palautetaan edelleen *HOPSService*:lle, joka taas palauttaa *true* *HOPSUi*:lle. *HOPSUi* asettaa tämän jälkeen näkymän sisäänkirjautumisruutuun.
+Kun käyttäjä painaa *newUserButton*:ia, tapahtumankäsittelijä vaihtaa ui:n uuden opiskelijan luontia varten tehtyyn *Scene*:n. Kun tämän jälkeen painaa *createUserButton*:a, *HOPSUi* kutsuu *HOPSService*:n *createNewUser*-metodia, jolle annetaan käyttäjän syöttämät nimi ja käyttäjätunnus parametreina. *HOPSService* luo uuden opiskelijan annetuilla parametreilla ja asettaa tämän id:n tilapäisesti arvoon -1. Tämän jälkeen *HOPSService* kutsuu *studentDao*:n metodia *save(student)* antaen parametrina juuri luodun opiskelijan. *studentDao* aluksi tarkistaa metodilla *findByUsername*, että annetulla käyttäjätunnuksella ei löydy opiskelijaa tietokannasta, ja palauttaa itselleen arvon *null* jos näin on. Tämän jälkeen *studentDao* tallentaa opiskelijan tietokantaan; tässä vaiheessa opiskelijan id määräytyy tietokannassa olevien opiskelijoiden määrän mukaan. Kun opiskelija on luotu, *studentDao* kutsuu metodiaan *findByUsername*, joka palauttaa juuri luodun opiskelijan. Tämä palautetaan edelleen *HOPSService*:lle, joka taas palauttaa *true* *HOPSUi*:lle. *HOPSUi* asettaa tämän jälkeen näkymän sisäänkirjautumisruutuun.

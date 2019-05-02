@@ -2,7 +2,7 @@
 
 ## Sovelluksen tarkoitus
 
-Sovelluksen avulla opiskelija pystyy seuraamaan omaa edistymistään opinnoissaan. Luodessaan käyttäjätunnuksen opiskelija voi kirjata suoritettuja kurssejaan järjestelmään, ja tätä kautta seurata omien opintojen edistymistä.
+Sovelluksen avulla opiskelija pystyy seuraamaan omaa edistymistään opinnoissaan. Luotuaan käyttäjätunnuksen opiskelija voi kirjata suoritettuja kurssejaan järjestelmään, ja tätä kautta seurata omien opintojen edistymistä.
 
 ## Toimintaympäristön rajoitteet
 
@@ -11,25 +11,34 @@ Sovelluksen avulla opiskelija pystyy seuraamaan omaa edistymistään opinnoissaa
 
 ## Käyttäjät
 
-Sovelluksella on ainostaan yksi käyttäjärooli; opiskelija.
+Sovelluksella on ainostaan yksi käyttäjärooli; opiskelija. Erillinen admin-näkymä on sovelluksessa, mutta tähän pääsy ei vaadi käyttäjätunnusta, vain admin-salasanan.
 
-## Suunnitellut toiminnot
+## Toiminnot
 
 Ennen kirjautumista:
 
-- opiskelija voi luoda itselleen uuden käyttäjätunnuksen
-- opiskelija voi kirjautua omalla käyttäjätunnuksellaan
+- käyttäjä voi luoda itselleen uuden käyttäjätunnuksen
+	- käyttäjätunnuksen täytyy olla uniikki, sekä nimen että käyttäjätunnuksen täytyy olla vähintään 3 merkkiä pitkä
+- käyttäjä voi kirjautua omalla käyttäjätunnuksellaan
+	- jos käyttäjätunnusta ei löydy, sovellus ilmoittaa tästä
+- käyttäjä voi siirtyä admin-näkymään admin-salasanalla
+	- jos salasana on väärin, sovellus ilmoittaa tästä
 
 Kirjauduttuaan:
 
-- opiskelija näkee kurssit, jotka hän on suorittanut, sekä näihin liittyvät opintopisteet
-- opiskelija näkee opintopisteittensä summan ja tutkinnon vaatiman opintopistemäärän
-- opiskelija voi lisätä uuden kurssisuorituksen järjestelmään
-- opiskelija voi kirjautua ulos järjestelmästä
+- käyttäjä näkee kurssit, jotka hän on suorittanut, sekä näihin liittyvät opintopisteet
+- käyttäjä näkee opintopisteittensä summan ja tutkinnon vaatiman opintopistemäärän
+- käyttäjä voi lisätä uuden kurssisuorituksen järjestelmään
+	- kurssikoodin ja kurssinimen täytyy olla yksittäiselle opiskelijalle uniikit
+- käyttäjä voi kirjautua ulos järjestelmästä
+
+Admin-näkymässä:
+
+- käyttäjä voi poistaa tietokannasta opiskelijan ja tähän liittyvät kurssisuoritukset
 
 Mahdollisia jatkokehitysideoita:
 
-- opiskelija voi valita, suorittaako kandi- vai maisteritutkintoa, mikä näkyy tutkinnon vaatimassa opintopistemäärässä
-- opiskelija voi valita, että sekä kandi- että maisteritutkinnon vaatimukset näkyvät samalla kertaa
-- opiskelija voi suunnitella tulevia opintojaan lisäämällä kursseja listaan, ja suoritettuaan kurssin opiskelija voi merkata tämän suoritetuksi
+- käyttäjä voi suunnitella tulevia opintojaan lisäämällä kursseja listaan, ja suoritettuaan kurssin opiskelija voi merkata tämän suoritetuksi
+- käyttäjien yhteyteen salasana, joka vaaditaan sisäänkirjautumiseen
+- kurssisuoritusten editointi
 

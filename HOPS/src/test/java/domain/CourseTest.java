@@ -64,6 +64,11 @@ public class CourseTest {
     public void getPointsWorks() {
         assertEquals(5, testCourse.getPoints());
     }
+    
+    @Test
+    public void toStringWorks() {
+        assertEquals("Kurssikoodi: TKT20002, kurssinimi: Ohjelmistotekniikka, opintopisteitä: 5", testCourse.toString());
+    }
  
 
 }

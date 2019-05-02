@@ -12,6 +12,14 @@ public class Course {
     private final String name;
     private final int points;
 
+    /**
+     * Konstruktori
+     * @param i id
+     * @param si opiskelijan id
+     * @param c kurssikoodi
+     * @param n kurssinimi
+     * @param p opintopisteet
+     */
     public Course(int i, int si, String c, String n, int p) {
         this.id = i;
         this.studentId = si;
@@ -20,22 +28,42 @@ public class Course {
         this.points = p;
     }
 
+    /**
+     * id:n haku
+     * @return id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Opiskelijan id:n haku
+     * @return opiskelijan id
+     */
     public int getStudentId() {
         return studentId;
     }
 
+    /**
+     * Kurssikoodin haku
+     * @return kurssikoodi
+     */
     public String getCode() {
         return code;
     }
 
+    /**
+     * Nimen haku
+     * @return nimi
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Opintopisteiden haku
+     * @return opintopisteet
+     */
     public int getPoints() {
         return points;
     }

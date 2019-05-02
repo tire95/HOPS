@@ -13,6 +13,11 @@ public class HOPSService {
     private final CourseDao courseDao;
     private Student loggedIn;
 
+    /**
+     * Konstruktori
+     * @param sd StudentDao, jota HOPSService käyttää
+     * @param cd CourseDao, jota HOPSService käyttää
+     */
     public HOPSService(StudentDao sd, CourseDao cd) {
         this.studentDao = sd;
         this.courseDao = cd;
@@ -75,6 +80,9 @@ public class HOPSService {
      * @return sisäänkirjautuneen opiskelijan nimi
      */
     public String getLoggedInName() {
+        if (loggedIn == null) {
+            return null;
+        }
         return loggedIn.getName();
     }
     

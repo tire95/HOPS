@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ui;
 
 import dao.CourseDao;
@@ -12,6 +8,8 @@ import dao.StudentDao;
 import database.Database;
 import domain.*;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -22,6 +20,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -46,26 +45,33 @@ public class HOPSUi extends Application {
     private Label totalPointsLabel;
 
     @Override
-    public void init() throws Exception {
-        Properties properties = new Properties();
-        properties.load(new FileInputStream("config.properties"));
-
-        String databaseAddress = properties.getProperty("database");
-        coursePointsMax = Integer.parseInt(properties.getProperty("coursePointsMax"));
-        adminPassword = properties.getProperty("adminPassword");
-
-        Database database = new Database("jdbc:sqlite:" + databaseAddress);
-        StudentDao sDao = new SQLStudentDao(database);
-        CourseDao cDao = new SQLCourseDao(database);
-        this.HOPSService = new HOPSService(sDao, cDao);
-        this.courses = new VBox();
-        this.students = new VBox();
-        this.loggedInWelcome = new Label();
-        this.totalPointsLabel = new Label();
+    public void init() {
+        try {
+            Properties properties = new Properties();
+            properties.load(new FileInputStream("config.properties"));
+            
+            String databaseAddress = properties.getProperty("database");
+            coursePointsMax = Integer.parseInt(properties.getProperty("coursePointsMax"));
+            adminPassword = properties.getProperty("adminPassword");
+            
+            Database database = new Database("jdbc:sqlite:" + databaseAddress);
+            StudentDao sDao = new SQLStudentDao(database);
+            CourseDao cDao = new SQLCourseDao(database);
+            this.HOPSService = new HOPSService(sDao, cDao);
+            this.courses = new VBox();
+            this.students = new VBox();
+            this.students.setSpacing(5);
+            this.loggedInWelcome = new Label();
+            this.totalPointsLabel = new Label();
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException | SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     @Override
-    public void start(Stage stage) throws SQLException {
+    public void start(Stage stage) {
 
 //        login screen
         Label guideForLogIn = new Label("Käyttäjätunnus");
@@ -89,7 +95,6 @@ public class HOPSUi extends Application {
         loginPane.add(toAdminSceneButton, 1, 5);
         loginPane.add(adminErrorMsg, 0, 6);
 
-//        loginPane.setPrefSize(400, 180);
         loginPane.setVgap(10);
         loginPane.setHgap(10);
         loginPane.setPadding(new Insets(20));
@@ -122,21 +127,20 @@ public class HOPSUi extends Application {
                     logInError.setTextFill(Color.RED);
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(HOPSUi.class.getName()).log(Level.SEVERE, null, ex);
+                stage.setScene(getErrorScene(ex));
             }
         });
 
         toNewUserScene.setOnAction(e -> {
+            userNameInput.setText("");
+            logInError.setText("");
+            adminErrorMsg.setText("");
             stage.setScene(newUserScene);
         });
 
         logInScene = new Scene(loginPane);
 
 //        admin scene
-        GridPane adminPane = new GridPane();
-        adminPane.setVgap(10);
-        adminPane.setHgap(10);
-        adminPane.setPadding(new Insets(20));
         Label adminLabel = new Label("Tervetuloa admin-näkymään. Täällä voit poistaa opiskelijan ja tähän liittyvät kurssit järjestelmästä.");
         Button toLogInSceneButton = new Button("Takaisin");
 
@@ -145,32 +149,47 @@ public class HOPSUi extends Application {
             stage.setScene(logInScene);
         });
 
+        ScrollPane adminScroll = new ScrollPane(students);
+        adminScroll.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+        adminScroll.setFitToHeight(true);
+        GridPane adminPane = new GridPane();
         adminPane.add(adminLabel, 0, 0);
-        adminPane.add(students, 0, 1);
-        adminPane.add(toLogInSceneButton, 0, 2);
+        adminPane.add(toLogInSceneButton, 0, 1);
 
-        adminScene = new Scene(adminPane);
+        adminPane.setVgap(10);
+        adminPane.setHgap(10);
+
+        BorderPane adminMainPane = new BorderPane();
+        adminMainPane.setPadding(new Insets(20));
+        adminMainPane.setCenter(adminScroll);
+        adminMainPane.setTop(adminPane);
+        adminMainPane.setPrefHeight(400);
+
+        adminScene = new Scene(adminMainPane);
 
 //        new user creation screen
         GridPane newUserPane = new GridPane();
-        newUserPane.setPrefSize(400, 180);
         newUserPane.setVgap(10);
         newUserPane.setHgap(10);
-        newUserPane.setPadding(new Insets(20));
 
         Label newUserNameLabel = new Label("Nimi: ");
         TextField newUserNameInput = new TextField();
         Label newUserUsernameLabel = new Label("Käyttäjätunnus: ");
         TextField newUserUsernameInput = new TextField();
         Button createUserButton = new Button("Luo uusi käyttäjä");
+        Button backToLogIn = new Button("Takaisin sisäänkirjautumiseen");
         Label newUserErrorMessage = new Label("");
 
+        VBox newUserVBox = new VBox();
         newUserPane.add(newUserNameLabel, 0, 0);
         newUserPane.add(newUserNameInput, 1, 0);
         newUserPane.add(newUserUsernameLabel, 0, 1);
         newUserPane.add(newUserUsernameInput, 1, 1);
         newUserPane.add(createUserButton, 0, 2);
-        newUserPane.add(newUserErrorMessage, 1, 2);
+        newUserPane.add(backToLogIn, 1, 2);
+        newUserVBox.getChildren().addAll(newUserPane, newUserErrorMessage);
+        newUserVBox.setSpacing(5);
+        newUserVBox.setPadding(new Insets(20));
 
         createUserButton.setOnAction(e -> {
             try {
@@ -192,11 +211,18 @@ public class HOPSUi extends Application {
                     newUserErrorMessage.setTextFill(Color.RED);
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(HOPSUi.class.getName()).log(Level.SEVERE, null, ex);
+                stage.setScene(getErrorScene(ex));
             }
         });
 
-        newUserScene = new Scene(newUserPane);
+        backToLogIn.setOnAction(e -> {
+            newUserNameInput.setText("");
+            newUserErrorMessage.setText("");
+            newUserUsernameInput.setText("");
+            stage.setScene(logInScene);
+        });
+
+        newUserScene = new Scene(newUserVBox);
 
 //        loggedIn screen
         Button logOutButton = new Button("Kirjaudu ulos");
@@ -213,18 +239,25 @@ public class HOPSUi extends Application {
             stage.setScene(newCourseScene);
         });
 
+        ScrollPane loggedInScroll = new ScrollPane(courses);
+        loggedInScroll.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+        loggedInScroll.setFitToHeight(true);
         GridPane loggedInPane = new GridPane();
         loggedInPane.add(loggedInWelcome, 0, 0);
         loggedInPane.add(totalPointsLabel, 0, 1);
         loggedInPane.add(logOutButton, 1, 0);
-        loggedInPane.add(courses, 0, 2);
-        loggedInPane.add(toCreateNewCourseButton, 0, 3);
+        loggedInPane.add(toCreateNewCourseButton, 0, 2);
 
         loggedInPane.setVgap(10);
         loggedInPane.setHgap(10);
-        loggedInPane.setPadding(new Insets(20));
 
-        loggedInScene = new Scene(loggedInPane);
+        BorderPane loggedInMainPane = new BorderPane();
+        loggedInMainPane.setPadding(new Insets(20));
+        loggedInMainPane.setCenter(loggedInScroll);
+        loggedInMainPane.setTop(loggedInPane);
+        loggedInMainPane.setPrefHeight(400);
+
+        loggedInScene = new Scene(loggedInMainPane);
 
 //        new course creation scene
         Label courseCodeLabel = new Label("Kurssikoodi: ");
@@ -251,6 +284,7 @@ public class HOPSUi extends Application {
 
         VBox courseBox = new VBox();
         courseBox.getChildren().addAll(courseCodeBox, courseNameBox, coursePointsBox, courseButtonBox, courseCreationFailMsg);
+        courseBox.setSpacing(5);
         courseBox.setPadding(new Insets(20));
 
         createNewCourseButton.setOnAction(e -> {
@@ -290,7 +324,7 @@ public class HOPSUi extends Application {
                     courseCreationFailMsg.setTextFill(Color.RED);
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(HOPSUi.class.getName()).log(Level.SEVERE, null, ex);
+                stage.setScene(getErrorScene(ex));
             }
         });
 
@@ -386,7 +420,24 @@ public class HOPSUi extends Application {
         return i;
     }
 
-    public static void main(String[] args) throws SQLException {
+    private Scene getErrorScene(Exception e) {
+        Label errorMessage1 = new Label("An exception was encountered: ");
+        Label errorMessage2 = new Label(e.getMessage());
+        Label errorMessage3 = new Label("Did you move/delete the database?");
+        Label errorMessage4 = new Label("Please close this window to terminate the application.");
+        errorMessage2.setTextFill(Color.RED);
+        VBox box = new VBox();
+        box.setSpacing(5);
+        box.setPadding(new Insets(20));
+        box.getChildren().addAll(errorMessage1, errorMessage2, errorMessage3);
+        return new Scene(box);
+    }
+
+    /**
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
         launch(HOPSUi.class);
     }
 

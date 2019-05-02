@@ -12,6 +12,11 @@ public final class Database {
     
     private final String databaseAddress;
 
+    /**
+     * Konstruktori (ja mahdollinen tietokannan alustus)
+     * @param databaseAddress tietokannan osoite
+     * @throws SQLException
+     */
     public Database(String databaseAddress) throws SQLException {
         this.databaseAddress = databaseAddress;
         try (Connection conn = getConnection()) {
@@ -22,6 +27,11 @@ public final class Database {
         }
     }
 
+    /**
+     * Yhteyden luonti tietokantaan
+     * @return yhteys tietokantaan
+     * @throws SQLException
+     */
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(databaseAddress);
     }
