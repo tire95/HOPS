@@ -20,11 +20,13 @@ Sovelluksen käyttämän tietokannan nimen, maksimiopintopisteiden määrän, ja
 
 [Käyttöohje](https://github.com/tire95/HOPS/blob/master/dokumentointi/kayttoohje.md)
 
+[Testausdokumentti](https://github.com/tire95/HOPS/blob/master/dokumentointi/testausdokumentti.md)
+
 ## Releaset
 
 [Viikko 5 (pre-release)](https://github.com/tire95/HOPS/releases/tag/viikko5)
 
-[Viiko 6 (pre-release)](https://github.com/tire95/HOPS/releases/tag/viikko6)
+[Viikko 6 (pre-release)](https://github.com/tire95/HOPS/releases/tag/viikko6)
 
 ## Komentorivitoiminnot
 
