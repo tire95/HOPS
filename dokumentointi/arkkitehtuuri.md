@@ -36,7 +36,7 @@ Opiskelijat ja kurssisuoritukset tallennetaan SQL-tietokantaan. Tästä huolehti
 
 Alla oleva tietokantakaavio kuvaa tietokantataulujen suhteen toisiinsa.
 
-![tietokantakaavio]()
+![tietokantakaavio](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/tietokantakaavio.png)
 
 Luokat noudattavat Data Access Object -suunnittelumallia, ja tarvittaessa ne voidaan korvata uusilla toteutuksilla, jos tietoja halutaan tallentaa muilla tavoilla.
 
