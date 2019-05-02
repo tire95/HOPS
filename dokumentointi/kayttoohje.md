@@ -50,7 +50,7 @@ Kirjauduttuasi sisään paina *Luo uusi kurssi* -nappia. Näkymä siirtyy kurssi
 
 Paina *Luo uusi kurssi* -nappia. Näkymä siirtyy kurssilistausnäkymään.
 
-![courseScreen2]()
+![courseScreen2](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/courseScreen2.png)
 
 Jos haluat poistaa kurssisuorituksen, paina kurssisuorituksen vieressä olevaa *Poista kurssi* -nappia.
 
@@ -58,10 +58,10 @@ Jos haluat poistaa kurssisuorituksen, paina kurssisuorituksen vieressä olevaa *
 
 Admin-näkymää varten kirjoita admin-salasana sisäänkirjautumisruudussa.
 
-![toAdminScreen]()
+![toAdminScreen](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/toAdminScreen.png)
 
 Admin-näkymä näyttää seuraavanlaiselta:
 
-![adminSceen]()
+![adminSceen](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/adminScene.png)
 
 Admin-näkymässä voit poistaa opiskelijan ja tähän liittyvät kurssisuoritukset painamalla opiskelijan käyttäjätunnuksen viereistä *Poista opiskelija* -nappia.
