@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedostot [hopsapp.jar ja config.properties]()
+Lataa tiedostot [hops-app.jar ja config.properties](https://github.com/tire95/HOPS/releases/tag/viikko7)
 
 ## Konfigurointi
 
