@@ -78,7 +78,7 @@ Tämän jälkeen *HOPSService* kutsuu *studentDao*:n metodia *save(student)* ant
 
 Kun opiskelija on luotu, *studentDao* kutsuu metodiaan *findByUsername*, joka palauttaa juuri luodun opiskelijan. Tämä palautetaan edelleen *HOPSService*:lle, joka taas palauttaa *true* *HOPSUi*:lle. *HOPSUi* asettaa tämän jälkeen näkymän sisäänkirjautumisruutuun.
 
-## Uuden kurssisuorituksen luonti
+### Uuden kurssisuorituksen luonti
 
 Alla oleva sekvenssikaavio kuvaa tilannetta, kun sisäänkirjautunut käyttäjä luo itselleen uuden kurssisuorituksen
 
