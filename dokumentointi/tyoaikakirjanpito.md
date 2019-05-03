@@ -21,4 +21,5 @@ Päivä | Tunnit | Mitä tein
 25.4. | 2h | JavaDoc dao-luokille, käyttöohje
 29.4. | 1h | graafisen käyttöliittymän muokkaus
 2.5. | 3,5h | dokumentoinnin, testien ja JavaDocin päivitystä, ikkuna virheiden catchaamista varten
-yht. | 42h
+3.5. | 3h | dokumentoinnin viimeistely
+yht. | 45h
