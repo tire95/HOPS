@@ -24,6 +24,8 @@ Sovelluksen käyttämän tietokannan nimen, maksimiopintopisteiden määrän, ja
 
 ## Releaset
 
+### [Viikko 7 (final release)](https://github.com/tire95/HOPS/releases/tag/viikko7)
+
 [Viikko 5 (pre-release)](https://github.com/tire95/HOPS/releases/tag/viikko5)
 
 [Viikko 6 (pre-release)](https://github.com/tire95/HOPS/releases/tag/viikko6)
@@ -42,12 +44,6 @@ Testikattavuus luodaan komennolla
 
 Kattavuusraporttia voi tarkastella tiedostosta *target/site/jacoco/index.html*
 
-### Suoritus komentoriviltä
-
-Ohjelman suoritus komentoriviltä onnistuu komennolla
-
-	mvn compile exec:java -Dexec.mainClass=ui.HOPSUi
-
 ### Suoritettavan jarin luonti
 
 Suoritettava jar voidaan luoda komennolla
@@ -61,6 +57,8 @@ Luotu jar-tiedosto, *HOPS-1.0-SNAPSHOT.jar*, löytyy kansiosta *target*
 JavaDoc generoidaan komennolla
 
 	mvn javadoc:javadoc
+	
+JavaDocia voi tarkastella tiedostosta *target/site/apidocs/allclasses-frame.html*
 
 ### Checkstyle
 
