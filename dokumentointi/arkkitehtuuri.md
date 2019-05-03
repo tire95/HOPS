@@ -82,7 +82,7 @@ Kun opiskelija on luotu, *studentDao* kutsuu metodiaan *findByUsername*, joka pa
 
 Alla oleva sekvenssikaavio kuvaa tilannetta, kun sisäänkirjautunut käyttäjä luo itselleen uuden kurssisuorituksen
 
-![createCourse]()
+![createCourse](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/createNewCourseSequence.png)
 
 Kun käyttäjä painaa *newCourseButton*:ia, tapahtumankäsittelijä vaihtaa ui:n uuden kurssisuorituksen luontia varten tehtyyn *Scene*:n. Kun tämän jälkeen painaa *createCourseButton*:a, *HOPSUi* kutsuu *HOPSService*:n *createNewCourse*-metodia, jolle annetaan käyttäjän syöttämät kurssikoodi, kurssinimi, opintopisteet, ja käyttäjän id parametreina. *HOPSService* luo uuden kurssin annetuilla parametreilla ja asettaa tämän id:n tilapäisesti arvoon -1.
 
