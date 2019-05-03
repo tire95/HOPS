@@ -54,13 +54,17 @@ Muuttamalla kohdan *database* parametria voidaan valita, minkä nimistä SQL-tie
 
 ## Sekvenssikaaviot
 
+Ohessa on esitetty kolme sekvenssikaaviota, jotka kuvaavat ohjelman toiminnallisuutta. Loput ohjelman toiminnallisuudet seuraavat alla olevia esimerkkejä; *HOPSUi* kutsuu *HOPSService*:n sopivaa metodia, joka vastaavasti kutsuu joko *studentDao*:n tai *courseDao*:n metodeja.
+
 ### Kirjautuminen
 
 Alla oleva sekvenssikaavio kuvaa tilannetta, kun käyttäjä kirjautuu järjestelmään
 
 ![logIn](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/logInSequence.png)
 
-Kun käyttäjä painaa sisäänkirjautumisnappia, tapahtumankäsittelijä kutsuu *HOPSService*:n login-metodia parametrina käyttäjän antama käyttäjätunnus. *HOPSService* määrittää *studentDao*:n kautta, löytyykö kyseisellä käyttäjätunnuksella opiskelijaa. Jos opiskelija löytyy, *studentDao* palauttaa kyseisen opiskelijan, *HOPSService* asettaa kyseisen opiskelijan sisäänkirjautuneeksi ja palauttaa *true* *HOPSUi*:lle. Tämän jälkeen *HOPSUi* kutsuu omaa metodiaan *getCourses*, jossa *HOPSUi* kutsuu *HOPSService*:n *getAllCourses*-metodia. Sisäänkirjautuneen opiskelijan id haetaan, ja tämän perusteella etsitään opiskelijan kaikki kurssit *courseDao*:sta metodilla *findAllForStudent(id)*. Tämä palauttaa listan *courses* *HOPSService*:lle, joka edelleen palauttaa listan *HOPSUi*:lle, joka tämän perusteella päivittää kurssilistan näkymään. Tämän jälkeen *HOPSUi* vaihtaa näkymän *loggedInScene*:n.
+Kun käyttäjä painaa sisäänkirjautumisnappia, tapahtumankäsittelijä kutsuu *HOPSService*:n login-metodia parametrina käyttäjän antama käyttäjätunnus. *HOPSService* määrittää *studentDao*:n kautta, löytyykö kyseisellä käyttäjätunnuksella opiskelijaa. Jos opiskelija löytyy, *studentDao* palauttaa kyseisen opiskelijan, *HOPSService* asettaa kyseisen opiskelijan sisäänkirjautuneeksi ja palauttaa *true* *HOPSUi*:lle.
+
+Tämän jälkeen *HOPSUi* kutsuu omaa metodiaan *getCourses*, jossa *HOPSUi* kutsuu *HOPSService*:n *getAllCourses*-metodia. Sisäänkirjautuneen opiskelijan id haetaan, ja tämän perusteella etsitään opiskelijan kaikki kurssit *courseDao*:sta metodilla *findAllForStudent(id)*. Tämä palauttaa listan *courses* *HOPSService*:lle, joka edelleen palauttaa listan *HOPSUi*:lle, joka tämän perusteella päivittää kurssilistan näkymään. Tämän jälkeen *HOPSUi* vaihtaa näkymän kurssilistausnäkymään (*loggedInScene*).
 
 ### Uuden opiskelijan luonti
 
@@ -68,4 +72,20 @@ Alla oleva sekvenssikaavio kuvaa tilannetta, kun käyttäjä luo uuden opiskelij
 
 ![createStudent](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/createNewStudentSequence.png)
 
-Kun käyttäjä painaa *newUserButton*:ia, tapahtumankäsittelijä vaihtaa ui:n uuden opiskelijan luontia varten tehtyyn *Scene*:n. Kun tämän jälkeen painaa *createUserButton*:a, *HOPSUi* kutsuu *HOPSService*:n *createNewUser*-metodia, jolle annetaan käyttäjän syöttämät nimi ja käyttäjätunnus parametreina. *HOPSService* luo uuden opiskelijan annetuilla parametreilla ja asettaa tämän id:n tilapäisesti arvoon -1. Tämän jälkeen *HOPSService* kutsuu *studentDao*:n metodia *save(student)* antaen parametrina juuri luodun opiskelijan. *studentDao* aluksi tarkistaa metodilla *findByUsername*, että annetulla käyttäjätunnuksella ei löydy opiskelijaa tietokannasta, ja palauttaa itselleen arvon *null* jos näin on. Tämän jälkeen *studentDao* tallentaa opiskelijan tietokantaan; tässä vaiheessa opiskelijan id määräytyy tietokannassa olevien opiskelijoiden määrän mukaan. Kun opiskelija on luotu, *studentDao* kutsuu metodiaan *findByUsername*, joka palauttaa juuri luodun opiskelijan. Tämä palautetaan edelleen *HOPSService*:lle, joka taas palauttaa *true* *HOPSUi*:lle. *HOPSUi* asettaa tämän jälkeen näkymän sisäänkirjautumisruutuun.
+Kun käyttäjä painaa *newUserButton*:ia, tapahtumankäsittelijä vaihtaa ui:n uuden opiskelijan luontia varten tehtyyn *Scene*:n. Kun tämän jälkeen painaa *createUserButton*:a, *HOPSUi* kutsuu *HOPSService*:n *createNewUser*-metodia, jolle annetaan käyttäjän syöttämät nimi ja käyttäjätunnus parametreina. *HOPSService* luo uuden opiskelijan annetuilla parametreilla ja asettaa tämän id:n tilapäisesti arvoon -1.
+
+Tämän jälkeen *HOPSService* kutsuu *studentDao*:n metodia *save(student)* antaen parametrina juuri luodun opiskelijan. *studentDao* aluksi tarkistaa metodilla *findByUsername*, että annetulla käyttäjätunnuksella ei löydy opiskelijaa tietokannasta, ja palauttaa itselleen arvon *null* jos näin on. Tämän jälkeen *studentDao* tallentaa opiskelijan tietokantaan; tässä vaiheessa opiskelijan id määräytyy tietokannassa olevien opiskelijoiden määrän mukaan.
+
+Kun opiskelija on luotu, *studentDao* kutsuu metodiaan *findByUsername*, joka palauttaa juuri luodun opiskelijan. Tämä palautetaan edelleen *HOPSService*:lle, joka taas palauttaa *true* *HOPSUi*:lle. *HOPSUi* asettaa tämän jälkeen näkymän sisäänkirjautumisruutuun.
+
+## Uuden kurssisuorituksen luonti
+
+Alla oleva sekvenssikaavio kuvaa tilannetta, kun sisäänkirjautunut käyttäjä luo itselleen uuden kurssisuorituksen
+
+![createCourse]()
+
+Kun käyttäjä painaa *newCourseButton*:ia, tapahtumankäsittelijä vaihtaa ui:n uuden kurssisuorituksen luontia varten tehtyyn *Scene*:n. Kun tämän jälkeen painaa *createCourseButton*:a, *HOPSUi* kutsuu *HOPSService*:n *createNewCourse*-metodia, jolle annetaan käyttäjän syöttämät kurssikoodi, kurssinimi, opintopisteet, ja käyttäjän id parametreina. *HOPSService* luo uuden kurssin annetuilla parametreilla ja asettaa tämän id:n tilapäisesti arvoon -1.
+
+Tämän jälkeen *HOPSService* kutsuu *courseDao*:n metodia *save(course)* antaen parametrina juuri luodun kurssin. *courseDao* tarkistaa metodeilla *findByName* ja *findByCode*, että käyttäjällä ei löydy kyseisellä kurssikoodilla ja/tai kurssinimellä kurssia, ja palauttaa *null* jos näin on. Tämän jälkeen *courseDao* tallentaa kurssin tietokantaan; tässä vaiheessa kurssin id määräytyy tietokannassa olevien kurssien määrän mukaan.
+
+Kun kurssi on luotu, *courseDao* palauttaa kurssin *HOPSService*:lle, joka taas palauttaa *true* *HOPSUi*:lle. *HOPSUi* kutsuu omaa metodiaan *getCourses()*, joka päivittää käyttäjän kurssilistan (katso kohta "Kirjautuminen"), ja asettaa näkymän kurssilistausnäkymään (*loggedInScene*).

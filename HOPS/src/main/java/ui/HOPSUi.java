@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -104,7 +102,7 @@ public class HOPSUi extends Application {
             if (adminInputText.equals(adminPassword)) {
                 adminErrorMsg.setText("");
                 logInError.setText("");
-                getStudents();
+                getStudents(stage);
                 stage.setScene(adminScene);
             } else {
                 adminErrorMsg.setText("Väärä salasana");
@@ -118,9 +116,9 @@ public class HOPSUi extends Application {
                     logInError.setText("");
                     adminErrorMsg.setText("");
                     loggedInWelcome.setText("Tervetuloa, " + HOPSService.getLoggedInName());
-                    totalPointsLabel.setText("Opintopisteesi: " + getCoursePoints() + "/" + coursePointsMax);
+                    totalPointsLabel.setText("Opintopisteesi: " + getCoursePoints(stage) + "/" + coursePointsMax);
                     userNameInput.clear();
-                    getCourses();
+                    getCourses(stage);
                     stage.setScene(loggedInScene);
                 } else {
                     logInError.setText("Tunnusta ei löydy");
@@ -316,8 +314,8 @@ public class HOPSUi extends Application {
                     courseCodeInput.clear();
                     courseNameInput.clear();
                     coursePointsInput.clear();
-                    getCourses();
-                    totalPointsLabel.setText("Opintopisteesi: " + getCoursePoints() + "/" + coursePointsMax);
+                    getCourses(stage);
+                    totalPointsLabel.setText("Opintopisteesi: " + getCoursePoints(stage) + "/" + coursePointsMax);
                     stage.setScene(loggedInScene);
                 } else {
                     courseCreationFailMsg.setText("Kyseisellä koodilla tai nimellä on jo kurssi");
@@ -341,22 +339,22 @@ public class HOPSUi extends Application {
 
     }
 
-    private void getCourses() {
+    private void getCourses(Stage stage) {
         try {
             courses.getChildren().clear();
             List<Course> coursesList = HOPSService.getAllCourses();
             if (!coursesList.isEmpty()) {
                 coursesList.forEach(course -> {
-                    courses.getChildren().add(createCourseNode(course));
+                    courses.getChildren().add(createCourseNode(course, stage));
                 });
             }
         } catch (SQLException ex) {
-            Logger.getLogger(HOPSUi.class.getName()).log(Level.SEVERE, null, ex);
+            stage.setScene(getErrorScene(ex));
         }
 
     }
 
-    private Node createCourseNode(Course c) {
+    private Node createCourseNode(Course c, Stage stage) {
         HBox box = new HBox();
         box.setSpacing(10);
         Label courseLabel = new Label(c.toString());
@@ -365,31 +363,31 @@ public class HOPSUi extends Application {
         courseButton.setOnAction(e -> {
             try {
                 HOPSService.removeCourse(c.getId());
-                getCourses();
-                totalPointsLabel.setText("Opintopisteesi: " + getCoursePoints() + "/" + coursePointsMax);
+                getCourses(stage);
+                totalPointsLabel.setText("Opintopisteesi: " + getCoursePoints(stage) + "/" + coursePointsMax);
             } catch (SQLException ex) {
-                Logger.getLogger(HOPSUi.class.getName()).log(Level.SEVERE, null, ex);
+                stage.setScene(getErrorScene(ex));
             }
         });
         box.getChildren().addAll(courseLabel, courseButton);
         return box;
     }
 
-    private void getStudents() {
+    private void getStudents(Stage stage) {
         try {
             students.getChildren().clear();
             List<Student> studentsList = HOPSService.getAllStudents();
             if (!studentsList.isEmpty()) {
                 studentsList.forEach(student -> {
-                    students.getChildren().add(createStudentNode(student));
+                    students.getChildren().add(createStudentNode(student, stage));
                 });
             }
         } catch (SQLException ex) {
-            Logger.getLogger(HOPSUi.class.getName()).log(Level.SEVERE, null, ex);
+            stage.setScene(getErrorScene(ex));
         }
     }
 
-    private Node createStudentNode(Student s) {
+    private Node createStudentNode(Student s, Stage stage) {
         HBox box = new HBox();
         box.setSpacing(10);
         Label studentLabel = new Label(s.getName());
@@ -398,16 +396,16 @@ public class HOPSUi extends Application {
         studentButton.setOnAction(e -> {
             try {
                 HOPSService.removeStudentAndCourses(s.getId());
-                getStudents();
+                getStudents(stage);
             } catch (SQLException ex) {
-                Logger.getLogger(HOPSUi.class.getName()).log(Level.SEVERE, null, ex);
+                stage.setScene(getErrorScene(ex));
             }
         });
         box.getChildren().addAll(studentLabel, studentButton);
         return box;
     }
 
-    private int getCoursePoints() {
+    private int getCoursePoints(Stage stage) {
         int i = 0;
         try {
             List<Course> coursesList = HOPSService.getAllCourses();
@@ -415,7 +413,7 @@ public class HOPSUi extends Application {
                 i = coursesList.stream().map((c) -> c.getPoints()).reduce(i, Integer::sum);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(HOPSUi.class.getName()).log(Level.SEVERE, null, ex);
+            stage.setScene(getErrorScene(ex));
         }
         return i;
     }
@@ -429,7 +427,7 @@ public class HOPSUi extends Application {
         VBox box = new VBox();
         box.setSpacing(5);
         box.setPadding(new Insets(20));
-        box.getChildren().addAll(errorMessage1, errorMessage2, errorMessage3);
+        box.getChildren().addAll(errorMessage1, errorMessage2, errorMessage3, errorMessage4);
         return new Scene(box);
     }
 

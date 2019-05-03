@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package dao;
 
 import dao.SQLCourseDao;
 import database.Database;
+import domain.Course;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

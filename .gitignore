@@ -1,4 +1,9 @@
 /laskarit/viikko2/Unicafe/target
 /laskarit/viikko2/Unicafe/nbproject
-HOPS/target
+/HOPS/target
+/HOPS/nbproject/
+/HOPS/nbactions.xml
+/HOPS/nb-configuration.xml
+/HOPS/HOPSDatabase.db
+/HOPS/testDatabase.db
 /HOPS/nbproject/
