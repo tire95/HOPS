@@ -23,4 +23,4 @@ Päivä | Tunnit | Mitä tein
 2.5. | 3,5h | dokumentoinnin, testien ja JavaDocin päivitystä, ikkuna virheiden catchaamista varten
 3.5. | 3h | dokumentoinnin viimeistely
 5.5. | 0,5h | Windows-testit, dokumentoinnin korjauksia
-yht. | 45h
+yht. | 45,5h
