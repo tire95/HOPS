@@ -14,7 +14,7 @@ Käyttöliittymää lukuunottamatta testausten rivi- ja haarautumakattavuus ovat
 
 ## Järjestelmätestaus
 
-Sovelluksen toimintaa on testattu Linux-ympäristössä käyttöohjeen mukaisesti, kun käynnistyshakemistossa on *config.properties*-tiedosto.
+Sovelluksen toimintaa on testattu Linux- ja Windows 10 -järjestelmissä, jotka oli varustettu Javan 8:lla versiolla, käyttöohjeen mukaisesti, kun käynnistyshakemistossa on *config.properties*-tiedosto.
 
 Sovelluksen toimintaa on testattu, kun tietojen tallennusta varten oleva tietokanta on valmiiksi olemassa, sekä kun tietokantaa ei ole, jolloin se luodaan automaattisesti.
 
