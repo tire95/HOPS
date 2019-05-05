@@ -22,4 +22,5 @@ Päivä | Tunnit | Mitä tein
 29.4. | 1h | graafisen käyttöliittymän muokkaus
 2.5. | 3,5h | dokumentoinnin, testien ja JavaDocin päivitystä, ikkuna virheiden catchaamista varten
 3.5. | 3h | dokumentoinnin viimeistely
+5.5. | 0,5h | Windows-testit, dokumentoinnin korjauksia
 yht. | 45h
