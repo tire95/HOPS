@@ -24,7 +24,7 @@ Sovelluksen käyttämän tietokannan nimen, maksimiopintopisteiden määrän, ja
 
 ## Releaset
 
-### [Viikko 7 (final release)](https://github.com/tire95/HOPS/releases/tag/viikko7)
+### [Loppupalautus](https://github.com/tire95/HOPS/releases/tag/viikko7)
 
 [Viikko 5 (pre-release)](https://github.com/tire95/HOPS/releases/tag/viikko5)
 
