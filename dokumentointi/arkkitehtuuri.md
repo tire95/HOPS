@@ -84,7 +84,7 @@ Alla oleva sekvenssikaavio kuvaa tilannetta, kun sisäänkirjautunut käyttäjä
 
 ![createCourse](https://github.com/tire95/HOPS/blob/master/dokumentointi/kuvat/createNewCourseSequence.png)
 
-Kun käyttäjä painaa *newCourseButton*:ia, tapahtumankäsittelijä vaihtaa ui:n uuden kurssisuorituksen luontia varten tehtyyn *Scene*:n. Kun tämän jälkeen painaa *createCourseButton*:a, *HOPSUi* kutsuu *HOPSService*:n *createNewCourse*-metodia, jolle annetaan käyttäjän syöttämät kurssikoodi, kurssinimi, opintopisteet, ja käyttäjän id parametreina. *HOPSService* luo uuden kurssin annetuilla parametreilla ja asettaa tämän id:n tilapäisesti arvoon -1.
+Kun käyttäjä painaa *newCourseButton*:ia, tapahtumankäsittelijä vaihtaa ui:n uuden kurssisuorituksen luontia varten tehtyyn *Scene*:n. Kun tämän jälkeen painaa *createCourseButton*:a, *HOPSUi* kutsuu *HOPSService*:n *createNewCourse*-metodia, jolle annetaan käyttäjän syöttämät kurssikoodi, kurssinimi ja opintopisteet parametreina. *HOPSService* luo uuden kurssin annetuilla parametreilla ja sisäänkirjautuneen käyttäjän id:llä, ja asettaa luodun kurssin id:n tilapäisesti arvoon -1.
 
 Tämän jälkeen *HOPSService* kutsuu *courseDao*:n metodia *save(course)* antaen parametrina juuri luodun kurssin. *courseDao* tarkistaa metodeilla *findByName* ja *findByCode*, että käyttäjällä ei löydy kyseisellä kurssikoodilla ja/tai kurssinimellä kurssia, ja palauttaa *null* jos näin on. Tämän jälkeen *courseDao* tallentaa kurssin tietokantaan; tässä vaiheessa kurssin id määräytyy tietokannassa olevien kurssien määrän mukaan.
 
